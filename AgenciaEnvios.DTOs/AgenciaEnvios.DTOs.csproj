@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\DTOUsuario\" />
+    <Folder Include="DTOs\DTOUrgente\" />
+    <Folder Include="DTOs\DTOSeguimiento\" />
+    <Folder Include="DTOs\DTOEnvio\" />
+    <Folder Include="DTOs\DTOComun\" />
+    <Folder Include="DTOs\DTOAgencia\" />
+  </ItemGroup>
+
+</Project>
