@@ -8,5 +8,6 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
 {
     public class RepositorioAgencia
     {
+
     }
 }

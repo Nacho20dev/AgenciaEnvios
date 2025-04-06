@@ -1,7 +1,20 @@
+using AgenciaEnvios.LogicaAccesoDatos.Repositorios;
+using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
+using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//DI - REPOS
+
+builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+
+//DI - CASOS USO
+
+
+//builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
 
 var app = builder.Build();
 
