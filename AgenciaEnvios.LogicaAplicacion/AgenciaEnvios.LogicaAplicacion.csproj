@@ -7,14 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AgenciaEnvios.LogicaAccesoDatos\AgenciaEnvios.LogicaAccesoDatos.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="CasosUso\CUComun\" />
     <Folder Include="CasosUso\CUSeguimiento\" />
     <Folder Include="CasosUso\CUUrgente\" />
-    <Folder Include="CasosUso\CUUsuario\" />
     <Folder Include="CasosUso\CUAgencia\" />
     <Folder Include="CasosUso\CUEnvio\" />
     <Folder Include="ICasosUso\ICUAgencia\" />
@@ -23,6 +18,10 @@
     <Folder Include="ICasosUso\ICUSeguimiento\" />
     <Folder Include="ICasosUso\ICUUrgente\" />
     <Folder Include="ICasosUso\ICUUsuario\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgenciaEnvios.LogicaNegocio\AgenciaEnvios.LogicaNegocio.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,16 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AgenciaEnvios.LogicaAplicacion\AgenciaEnvios.LogicaAplicacion.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="CustomExceptions\ComunExceptions\" />
     <Folder Include="CustomExceptions\AgenciaExceptions\" />
     <Folder Include="CustomExceptions\EnvioExceptions\" />
-    <Folder Include="CustomExceptions\UsuarioExceptions\" />
     <Folder Include="CustomExceptions\UrgenteExceptions\" />
     <Folder Include="CustomExceptions\SeguimientoExceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgenciaEnvios.LogicaAccesoDatos\AgenciaEnvios.LogicaAccesoDatos.csproj" />
   </ItemGroup>
 
 </Project>
