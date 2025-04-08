@@ -10,12 +10,12 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 {
     public class Usuario
     {
-        private string _nombre { get; set; }
-        private string _apellido { get; set; }
-        private string _contrasenia { get; set; }
+        public string _nombre { get; set; }
+        public string _apellido { get; set; }
+        public string _contrasenia { get; set; }
 
-        private string _email { get; set; }
-        private string _rol { get; set; }
+        public string _email { get; set; }
+        public string _rol { get; set; }
 
         public Usuario(string Nombre, string Apellido, string Contrasenia, string Rol)
         {
@@ -39,12 +39,12 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
         {
             if (string.IsNullOrEmpty(_nombre))
             {
-                throw new NombreVacioEx("El nombre no puede estar vacio");
+                throw new NombreVacioEx();
             }
 
             if (string.IsNullOrEmpty(_apellido))
             {
-                throw new ApellidoVacioEx("El apellido no puede estar vacio");
+                throw new ApellidoVacioEx();
             }
 
             if (string.IsNullOrEmpty(_contrasenia))
@@ -89,7 +89,7 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 
             if(!_email.Contains("@") && !_email.EndsWith(".com"))
             {
-                throw new EmailInvalidoEx("El email debe contener arroba y terminar en .com")
+                throw new EmailInvalidoEx("El email debe contener arroba y terminar en .com");
             }
 
 

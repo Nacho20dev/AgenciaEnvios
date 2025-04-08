@@ -1,6 +1,11 @@
+using AgenciaEnvios.LogicaAccesoDatos;
+using AgenciaEnvios.LogicaAplicacion;
 using AgenciaEnvios.LogicaAccesoDatos.Repositorios;
 using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
+using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +15,7 @@ builder.Services.AddControllersWithViews();
 //DI - REPOS
 
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+
 
 //DI - CASOS USO
 

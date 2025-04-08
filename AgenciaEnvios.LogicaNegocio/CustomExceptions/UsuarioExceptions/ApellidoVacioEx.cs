@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions
 {
-  public class ApellidoVacioEx:Exception
-
+    public class ApellidoVacioEx : Exception
     {
-        public ApellidoVacioEx(string? message) : base(message)
-        {
-        }
+        public ApellidoVacioEx()
+            : base("El apellido del usuario no puede estar vacío.") { }
+
+        public ApellidoVacioEx(string? message)
+            : base(message) { }
+
     }
 }
