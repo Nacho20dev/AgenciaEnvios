@@ -20,7 +20,8 @@ builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 //DI - CASOS USO
 
 
-//builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
+
+builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
 
 var app = builder.Build();
 

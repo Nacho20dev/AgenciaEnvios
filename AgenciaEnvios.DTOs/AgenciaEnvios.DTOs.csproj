@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\DTOUsuario\" />
     <Folder Include="DTOs\DTOUrgente\" />
     <Folder Include="DTOs\DTOSeguimiento\" />
     <Folder Include="DTOs\DTOEnvio\" />
     <Folder Include="DTOs\DTOComun\" />
     <Folder Include="DTOs\DTOAgencia\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgenciaEnvios.LogicaNegocio\AgenciaEnvios.LogicaNegocio.csproj" />
   </ItemGroup>
 
 </Project>

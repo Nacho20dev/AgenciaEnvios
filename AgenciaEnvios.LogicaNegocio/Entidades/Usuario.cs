@@ -10,6 +10,7 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 {
     public class Usuario
     {
+        public int _id {  get; set; }
         public string _nombre { get; set; }
         public string _apellido { get; set; }
         public string _contrasenia { get; set; }
@@ -17,11 +18,12 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
         public string _email { get; set; }
         public string _rol { get; set; }
 
-        public Usuario(string Nombre, string Apellido, string Contrasenia, string Rol)
+        public Usuario(string Nombre, string Apellido, string Contrasenia, string email, string Rol)
         {
             _nombre = Nombre;
             _apellido = Apellido;
             _contrasenia = Contrasenia;
+            _email = email;
             _rol = Rol;
 
             Validar();
