@@ -10,16 +10,17 @@ namespace AgenciaEnvios.WebApp.Controllers
     {
         private ICUAltaUsuario _cUAltaUsuario;
         private ICUListarUsuarios _CuListarUsuarios;
-
+        private ICUEliminarUsuario _CUEliminarUsuario;
 
         //private ICULogin _cULogin;
 
-        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios
+        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICUEliminarUsuario CUEliminarUsuario
+
       )
         {
             _cUAltaUsuario = _CUAltaUsuario;
             _CuListarUsuarios = CuListarUsuarios;
-
+            _CUEliminarUsuario = CUEliminarUsuario;
 
 
             //_cULogin = _CULogin;
@@ -60,6 +61,11 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
 
+        public IActionResult Delete(int id)
+        {
+            _CUEliminarUsuario.EliminarUsuario(id);
+            return RedirectToAction("Index");
+        }
 
 
 
