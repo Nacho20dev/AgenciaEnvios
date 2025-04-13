@@ -9,46 +9,37 @@ namespace AgenciaEnvios.WebApp.Controllers
     public class UsuarioController : Controller
     {
         private ICUAltaUsuario _cUAltaUsuario;
-        
+        private ICUListarUsuarios _CuListarUsuarios;
+
 
         //private ICULogin _cULogin;
 
-        public UsuarioController(ICUAltaUsuario _CUAltaUsuario
+        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios
       )
         {
             _cUAltaUsuario = _CUAltaUsuario;
-           
+            _CuListarUsuarios = CuListarUsuarios;
+
+
 
             //_cULogin = _CULogin;
         }
+
+
         public IActionResult Index()
         {
-            return View();
+            ViewBag.mensaje = TempData["mensaje"]; 
+            return View(_CuListarUsuarios.ListarUsuarios()); 
         }
+
+
 
         public IActionResult Create()
         {
-            return View(new DTOAltaUsuario()); // Siempre mejor pasar el modelo vacío también acá
+            return View(new DTOAltaUsuario()); 
         }
 
-        [HttpPost]
-        public IActionResult Create(DTOAltaUsuario dto)
-        {
-            try
-            {
-                _cUAltaUsuario.AltaUsuario(dto);
-                ViewBag.mensaje = "Alta correcta";
-                return View(new DTOAltaUsuario());
-
-
-
-            }
-            catch (Exception ex)
-            {
-                ViewBag.mensaje = ex.Message;
-                return View();
-            }
-        }
+      
 
         
 
