@@ -25,13 +25,13 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
         public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICULogin  _CULogin,
-ICUEliminarUsuario _CUEliminarUsuario)
+ICUEliminarUsuario _cUEliminarUsuario)
       
         {
             _cUAltaUsuario = _CUAltaUsuario;
             _CuListarUsuarios = CuListarUsuarios;
 
-            _CUEliminarUsuario = _CUEliminarUsuario;
+            _CUEliminarUsuario = _cUEliminarUsuario;
 
             _cULogin=_CULogin;
 
@@ -42,9 +42,9 @@ ICUEliminarUsuario _CUEliminarUsuario)
 
         }
 
-        [LogueadoAuthorize]
-        [FuncionarioAuthorize]
-        [AdministradorAuthorize]
+        //[LogueadoAuthorize]
+        ////[FuncionarioAuthorize]
+        ////[AdministradorAuthorize]
         public IActionResult Index()
         {
             ViewBag.mensaje = TempData["mensaje"]; 
@@ -52,8 +52,8 @@ ICUEliminarUsuario _CUEliminarUsuario)
         }
 
 
-        [LogueadoAuthorize]
-        [AdministradorAuthorize]
+        //[LogueadoAuthorize]
+        //[AdministradorAuthorize]
         public IActionResult Create()
         {
             return View(new DTOAltaUsuario()); 
@@ -96,13 +96,13 @@ ICUEliminarUsuario _CUEliminarUsuario)
                 switch (b.Rol)
                 {
                     case "Administrador":
-                        return RedirectToAction("Index", "Usuario"); // Controlador y acción
+                        return RedirectToAction("Usuario", "Index"); // Controlador y acción
                     case "Empleado":
-                        return RedirectToAction("Index", "Usuario");
+                        return RedirectToAction("Usuario", "Index");
                     case "Cliente":
-                        return RedirectToAction("Index", "Usuario");
+                        return RedirectToAction("Usuario", "Index");
                     default:
-                        return RedirectToAction("Index", "Usuario");
+                        return RedirectToAction("Usuario", "Index");
                 }
 
             }
@@ -119,8 +119,9 @@ ICUEliminarUsuario _CUEliminarUsuario)
         public IActionResult Delete(int id)
         {
             _CUEliminarUsuario.EliminarUsuario(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Usuario");
         }
+
 
 
 

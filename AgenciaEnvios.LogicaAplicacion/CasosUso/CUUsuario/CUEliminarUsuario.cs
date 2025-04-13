@@ -16,10 +16,22 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
         {
             _repoUsuario = repoUsuario;
         }
+
         public void EliminarUsuario(int id)
         {
+            // Primero busca el usuario por id
+            var usuario = _repoUsuario.FindById(id);
+
+            // Verifica si el usuario existe
+            if (usuario == null)
+            {
+                throw new Exception("Usuario no encontrado.");
+            }
+
+            // Si el usuario existe, procede con la eliminación
             _repoUsuario.Remove(id);
         }
     }
+
 
 }
