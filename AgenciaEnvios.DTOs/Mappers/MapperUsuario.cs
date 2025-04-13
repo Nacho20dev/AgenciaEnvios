@@ -33,5 +33,28 @@ namespace AgenciaEnvios.DTOs.Mappers
 
             return dto;
         }
+
+        public static List<DTOUsuario> FromListUsuarioToListDtoUsuario(List<Usuario> usuarios)
+        {
+            List<DTOUsuario> ret = new List<DTOUsuario>();
+
+            foreach (Usuario usu in usuarios)
+            {
+                DTOUsuario dto = new DTOUsuario();
+                dto.Id = usu.Id;
+                dto.Nombre = usu.Nombre;
+                dto.Apellido = usu.Apellido;
+                dto.Contrasenia = usu.Contrasenia;
+                dto.Email = usu.Email;
+                dto.Rol = usu.Rol;
+
+                ret.Add(dto); 
+            }
+
+            return ret;
+        }
+
+
+
     }
 }
