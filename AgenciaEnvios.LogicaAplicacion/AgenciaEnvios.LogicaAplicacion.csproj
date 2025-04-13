@@ -23,6 +23,7 @@
     <ProjectReference Include="..\AgenciaEnvios.DTOs\AgenciaEnvios.DTOs.csproj" />
     <ProjectReference Include="..\AgenciaEnvios.LogicaAccesoDatos\AgenciaEnvios.LogicaAccesoDatos.csproj" />
     <ProjectReference Include="..\AgenciaEnvios.LogicaNegocio\AgenciaEnvios.LogicaNegocio.csproj" />
+    <ProjectReference Include="..\Utilidades\Utilidades.csproj" />
   </ItemGroup>
 
 </Project>

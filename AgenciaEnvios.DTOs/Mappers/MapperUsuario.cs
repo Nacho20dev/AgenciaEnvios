@@ -2,6 +2,7 @@
 using AgenciaEnvios.LogicaNegocio.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,12 @@ namespace AgenciaEnvios.DTOs.Mappers
     {
         public static Usuario DTOToUsuario(DTOAltaUsuario dto)
         {
-            Usuario u = new Usuario(dto.Nombre, dto.Apellido, dto.Contrasenia, dto.Email, dto.Rol);
+           
+
+            string passHashed = Utilidades.Crypto.HashPasswordConBcrypt(dto.Contrasenia, 12);
+
+
+            Usuario u = new Usuario(dto.Nombre, dto.Apellido, passHashed, dto.Email, dto.Rol);
 
 
             return u;

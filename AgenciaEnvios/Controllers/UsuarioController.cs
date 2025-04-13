@@ -1,6 +1,7 @@
 ﻿using AgenciaEnvios.DTOs.DTOs.DTOUsuario;
 using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
+using AgenciaEnvios.WebApp.NewFolder;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,22 +11,23 @@ namespace AgenciaEnvios.WebApp.Controllers
     {
         private ICUAltaUsuario _cUAltaUsuario;
         private ICUListarUsuarios _CuListarUsuarios;
+        private ICULogin _cULogin;
 
-
-        //private ICULogin _cULogin;
-
-        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios
+        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICULogin  _CULogin
       )
         {
             _cUAltaUsuario = _CUAltaUsuario;
             _CuListarUsuarios = CuListarUsuarios;
+            _cULogin=_CULogin;
 
 
 
-            //_cULogin = _CULogin;
+
         }
 
-
+        [LogueadoAuthorize]
+        [FuncionarioAuthorize]
+        [AdministradorAuthorize]
         public IActionResult Index()
         {
             ViewBag.mensaje = TempData["mensaje"]; 
@@ -33,7 +35,8 @@ namespace AgenciaEnvios.WebApp.Controllers
         }
 
 
-
+        [LogueadoAuthorize]
+        [AdministradorAuthorize]
         public IActionResult Create()
         {
             return View(new DTOAltaUsuario()); 
@@ -56,6 +59,42 @@ namespace AgenciaEnvios.WebApp.Controllers
                 ViewBag.mensaje = ex.Message;
                 return View();
             }
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Login(DTOUsuario dto)
+        {
+            try
+            {
+                
+                DTOUsuario b = _cULogin.VerificarDatosParaLogin(dto);
+                HttpContext.Session.SetInt32("LogueadoId", (int)b.Id);
+                HttpContext.Session.SetString("LogueadoRol", b.Rol);
+                switch (b.Rol)
+                {
+                    case "Administrador":
+                        return RedirectToAction("Index", "Usuario"); // Controlador y acción
+                    case "Empleado":
+                        return RedirectToAction("Index", "Usuario");
+                    case "Cliente":
+                        return RedirectToAction("Index", "Usuario");
+                    default:
+                        return RedirectToAction("Index", "Usuario");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.mensaje = ex.Message;
+                return View();
+            }
+            return View();
         }
 
 

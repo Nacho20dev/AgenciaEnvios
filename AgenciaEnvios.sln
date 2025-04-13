@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenciaEnvios.WebApp", "AgenciaEnvios\AgenciaEnvios.WebApp.csproj", "{C8E370C5-E604-4E0C-9B39-B5FA614862A7}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenciaEnvios.DTOs", "AgenciaEnvios.DTOs\AgenciaEnvios.DTOs.csproj", "{A6A22A85-13FC-46BF-923B-734A43F76DD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenciaEnvios.LogicaAplicacion", "AgenciaEnvios.LogicaAplicacion\AgenciaEnvios.LogicaAplicacion.csproj", "{DD594973-A396-4A26-A728-0CE972E90A94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades", "Utilidades\Utilidades.csproj", "{6FCD8A29-71F0-4F20-AD8A-64F37A578F31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasehear", "Hasehear\Hasehear.csproj", "{F317ACCC-A000-43C0-A78B-C286A736FF55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{DD594973-A396-4A26-A728-0CE972E90A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD594973-A396-4A26-A728-0CE972E90A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD594973-A396-4A26-A728-0CE972E90A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FCD8A29-71F0-4F20-AD8A-64F37A578F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FCD8A29-71F0-4F20-AD8A-64F37A578F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FCD8A29-71F0-4F20-AD8A-64F37A578F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FCD8A29-71F0-4F20-AD8A-64F37A578F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F317ACCC-A000-43C0-A78B-C286A736FF55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F317ACCC-A000-43C0-A78B-C286A736FF55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F317ACCC-A000-43C0-A78B-C286A736FF55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F317ACCC-A000-43C0-A78B-C286A736FF55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
