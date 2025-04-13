@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgenciaEnvios.LogicaNegocio.Entidades
 {
-   publicl class Urgente
+   public class Urgente
     {
     }
 }

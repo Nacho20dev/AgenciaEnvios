@@ -27,7 +27,7 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
         public void AltaUsuario(DTOAltaUsuario dto)
         {
 
-            Usuario buscado = _repoUsuario.FindByEmail(dto.email);
+            Usuario buscado = _repoUsuario.FindByEmail(dto.Email);
             if (buscado != null)
             {
                 throw new EmailYaExisteEx();

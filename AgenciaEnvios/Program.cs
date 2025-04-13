@@ -5,9 +5,21 @@ using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("AgenciaEnvios");//DefaultConnection debe coincidir con el nombre designado en el JSON.
+
+builder.Services.AddDbContext<ApplicationDBContext>(
+    options => options.UseSqlServer(
+        connectionString,
+        sqlOptions => sqlOptions.MigrationsAssembly("AgenciaEnvios.LogicaAccesoDatos")
+    )
+);
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -10,10 +10,10 @@ namespace AgenciaEnvios.WebApp.Controllers
         private ICUAltaUsuario _cUAltaUsuario;
         //private ICULogin _cULogin;
         
-        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICULogin _CULogin) 
+        public UsuarioController(ICUAltaUsuario _CUAltaUsuario) 
         {
             _cUAltaUsuario = _CUAltaUsuario;
-            _cULogin = _CULogin;
+            //_cULogin = _CULogin;
         }
         public IActionResult Index()
         {
@@ -38,7 +38,7 @@ namespace AgenciaEnvios.WebApp.Controllers
             {
                 ViewBag.mensaje=ex.Message;
             }
-            return View();
+            return View("Index", "Home");
         }
 
     }

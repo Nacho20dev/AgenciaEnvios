@@ -10,21 +10,22 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 {
     public class Usuario
     {
-        public int _id {  get; set; }
-        public string _nombre { get; set; }
-        public string _apellido { get; set; }
-        public string _contrasenia { get; set; }
+        
+        public int Id {  get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Contrasenia { get; set; }
 
-        public string _email { get; set; }
-        public string _rol { get; set; }
+        public string Email { get; set; }
+        public string Rol { get; set; }
 
-        public Usuario(string Nombre, string Apellido, string Contrasenia, string email, string Rol)
+        public Usuario(string nombre, string apellido, string contrasenia, string email, string rol)
         {
-            _nombre = Nombre;
-            _apellido = Apellido;
-            _contrasenia = Contrasenia;
-            _email = email;
-            _rol = Rol;
+            Nombre = nombre;
+            Apellido = apellido;
+            Contrasenia = contrasenia;
+            Email = email;
+            Rol = rol;
 
             Validar();
 
@@ -39,22 +40,22 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 
         public void Validar()
         {
-            if (string.IsNullOrEmpty(_nombre))
+            if (string.IsNullOrEmpty(Nombre))
             {
                 throw new NombreVacioEx();
             }
 
-            if (string.IsNullOrEmpty(_apellido))
+            if (string.IsNullOrEmpty(Apellido))
             {
                 throw new ApellidoVacioEx();
             }
 
-            if (string.IsNullOrEmpty(_contrasenia))
+            if (string.IsNullOrEmpty(Contrasenia))
             {
                 throw new ContraseniaVaciaEx("La contraseña no puede estar vacia");
             }
 
-            if(_contrasenia.Length <8)
+            if(Contrasenia.Length <8)
             {
                 throw new ContraseniaCortaEx("La contraseña debe tener 8 caracteres como mínimo");
             }
@@ -82,20 +83,20 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
                 return tieneMayuscula && tieneMinuscula && tieneNumero && tieneEspecial;
             }
 
-            if (!CumpleCaracteres(_contrasenia))
+            if (!CumpleCaracteres(Contrasenia))
             {
                 throw new NoCumpleCaracteresEx("La contraseña debe contener al menos una minúscula, una mayúscula,un número y un simbolo");
             }
 
 
 
-            if(!_email.Contains("@") && !_email.EndsWith(".com"))
+            if(!Email.Contains("@") && !Email.EndsWith(".com"))
             {
                 throw new EmailInvalidoEx("El email debe contener arroba y terminar en .com");
             }
 
 
-            if(_rol != "Administrador" && _rol != "Funcionario" && _rol != "Cliente")
+            if(Rol != "Administrador" && Rol != "Funcionario" && Rol != "Cliente")
             {
                 throw new UsuarioNoValidoEx("Debe seleccionar un usuario");
             }

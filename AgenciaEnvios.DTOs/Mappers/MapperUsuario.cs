@@ -12,7 +12,7 @@ namespace AgenciaEnvios.DTOs.Mappers
     {
         public static Usuario DTOToUsuario(DTOAltaUsuario dto)
         {
-            Usuario u = new Usuario(dto.nombre, dto.apellido, dto.contrasenia, dto.email, dto.rol);
+            Usuario u = new Usuario(dto.Nombre, dto.Apellido, dto.Contrasenia, dto.Email, dto.Rol);
 
 
             return u;
@@ -23,12 +23,12 @@ namespace AgenciaEnvios.DTOs.Mappers
 
             DTOUsuario dto = new DTOUsuario();
 
-            dto.id = usu._id;
-            dto.nombre = usu._nombre;
-            dto.apellido = usu._apellido;
-            dto.contrasenia = usu._contrasenia;
-            dto.email = usu._email;
-            dto.rol = usu._rol;
+            dto.Id = usu.Id;
+            dto.Nombre = usu.Nombre;
+            dto.Apellido = usu.Apellido;
+            dto.Contrasenia = usu.Contrasenia;
+            dto.Email = usu.Email;
+            dto.Rol = usu.Rol;
 
 
             return dto;

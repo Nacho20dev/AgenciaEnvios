@@ -12,30 +12,30 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
     public class DTOUsuario
     {
 
-        public int? id {  get; set; }
+        public int? Id {  get; set; }
 
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]
         [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]
 
-        public string? nombre { get; set; }
+        public string? Nombre { get; set; }
 
         [Required(ErrorMessage = "El apellido es obligatorio.")]
         [StringLength(50, ErrorMessage = "El apellido no puede superar los 50 caracteres.")]
         [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El apellido solo puede contener letras y espacios.")]
-        public string? apellido { get; set; }
+        public string? Apellido { get; set; }
 
         [Required]
         [StringLength(32, MinimumLength = 8, ErrorMessage = "La longitud debe estar entre 8 y 32 caracteres")]
-        public string? contrasenia { get; set; }
+        public string? Contrasenia { get; set; }
 
         [Required]
         [EmailAddress(ErrorMessage = "La longitud debe estar entre 8 y 32 caracteres")]
-        public string? email { get; set; }
+        public string? Email { get; set; }
 
         [Required(ErrorMessage = "El rol es obligatorio.")]
-        public string? rol { get; set; }
+        public string? Rol { get; set; }
 
 
 

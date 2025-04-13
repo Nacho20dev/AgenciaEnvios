@@ -26,7 +26,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
 
         public List<Usuario> FindAll()
         {
-         return _context.Usuarios.ToList();
+            return _context.Usuarios.ToList();
         }
 
 
@@ -34,7 +34,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
         public Usuario FindByEmail(string email)
         {
             if (email == null) throw new ArgumentException("Datos incorrectos");
-            return _context.Usuarios.SingleOrDefault(x => x._email == email);
+            return _context.Usuarios.SingleOrDefault(x => x.Email == email);
         }
 
 
@@ -43,36 +43,37 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
             return _context.Usuarios.Find(id);
         }
 
-    //    public void Remove(int id)
-    //    {
-    //      _context.Remove(id);
-    //        _context.SaveChanges();
-    //    }
+        //    public void Remove(int id)
+        //    {
+        //      _context.Remove(id);
+        //        _context.SaveChanges();
+        //    }
 
 
 
-    //    //Recibe un usuario previamente mapeado. Lo busca por mail,
-    //    //verifica que no deje ningún dato de los editables vacio
-    //    //y lo agrega al context. 
-    //    //Ver si vamos a agregar rol para caso administrador. Sino estaría pronto!
-    //    public void Update(Usuario usu)
-    //    {
-    //        var usuario = _context.Usuarios.SingleOrDefault(u => u._email == usu._email);
+        //    //Recibe un usuario previamente mapeado. Lo busca por mail,
+        //    //verifica que no deje ningún dato de los editables vacio
+        //    //y lo agrega al context. 
+        //    //Ver si vamos a agregar rol para caso administrador. Sino estaría pronto!
+        //    public void Update(Usuario usu)
+        //    {
+        //        var usuario = _context.Usuarios.SingleOrDefault(u => u._email == usu._email);
 
-    //        if (usuario == null)
-    //            throw new InvalidOperationException("Usuario no encontrado.");
+        //        if (usuario == null)
+        //            throw new InvalidOperationException("Usuario no encontrado.");
 
-    //        if (string.IsNullOrEmpty(usuario._nombre))
-    //            throw new NombreVacioEx();
+        //        if (string.IsNullOrEmpty(usuario._nombre))
+        //            throw new NombreVacioEx();
 
-    //        if (string.IsNullOrEmpty(usuario._apellido))
-    //            throw new ApellidoVacioEx();
+        //        if (string.IsNullOrEmpty(usuario._apellido))
+        //            throw new ApellidoVacioEx();
 
-    //        usuario._nombre = usu._nombre;
-    //        usuario._apellido = usu._apellido;
+        //        usuario._nombre = usu._nombre;
+        //        usuario._apellido = usu._apellido;
 
 
-    //        _context.SaveChanges();
-    //    }
-    //}
+        //        _context.SaveChanges();
+        //    }
+        //}
+    }
 }
