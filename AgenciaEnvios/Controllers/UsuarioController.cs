@@ -39,13 +39,30 @@ namespace AgenciaEnvios.WebApp.Controllers
             return View(new DTOAltaUsuario()); 
         }
 
-      
+        [HttpPost]
+        public IActionResult Create(DTOAltaUsuario dto)
+        {
+            try
+            {
+                _cUAltaUsuario.AltaUsuario(dto);
+                ViewBag.mensaje = "Alta correcta";
+                return View(new DTOAltaUsuario());
 
-        
+
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.mensaje = ex.Message;
+                return View();
+            }
+        }
 
 
 
-       
+
+
+
 
 
     }
