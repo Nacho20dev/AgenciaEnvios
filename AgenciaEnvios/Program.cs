@@ -29,14 +29,16 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 
+
 //DI - CASOS USO
 
 
-
+builder.Services.AddScoped<ICULogin, CULogin>();
 builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
 builder.Services.AddScoped<ICUListarUsuarios, CUListarUsuarios>();
 builder.Services.AddScoped<ICUEliminarUsuario, CUEliminarUsuario>();
 
+builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,7 +51,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
