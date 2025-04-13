@@ -4,6 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
+@if (ViewBag.mensaje != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.mensaje
+    </div>
+}
+
 <h1>Create</h1>
 
 <h4>DTOAltaUsuario</h4>
