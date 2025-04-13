@@ -12,25 +12,30 @@ namespace AgenciaEnvios.WebApp.Controllers
         private ICUAltaUsuario _cUAltaUsuario;
         private ICUListarUsuarios _CuListarUsuarios;
 
+
         private ICUEliminarUsuario _CUEliminarUsuario;
 
-        //private ICULogin _cULogin;
 
-        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICUEliminarUsuario CUEliminarUsuario
-
+        
 
         private ICULogin _cULogin;
 
-        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICULogin  _CULogin
 
-      )
+
+
+
+        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICULogin  _CULogin,
+ICUEliminarUsuario _CUEliminarUsuario)
+      
         {
             _cUAltaUsuario = _CUAltaUsuario;
             _CuListarUsuarios = CuListarUsuarios;
 
-            _CUEliminarUsuario = CUEliminarUsuario;
+            _CUEliminarUsuario = _CUEliminarUsuario;
 
             _cULogin=_CULogin;
+
+
 
 
 
