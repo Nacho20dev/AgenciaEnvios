@@ -1,4 +1,4 @@
-﻿using AgenciaEnvios.DTOs.DTOs.DTOUsuario;
+using AgenciaEnvios.DTOs.DTOs.DTOUsuario;
 using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.WebApp.NewFolder;
@@ -11,13 +11,25 @@ namespace AgenciaEnvios.WebApp.Controllers
     {
         private ICUAltaUsuario _cUAltaUsuario;
         private ICUListarUsuarios _CuListarUsuarios;
+
+        private ICUEliminarUsuario _CUEliminarUsuario;
+
+        //private ICULogin _cULogin;
+
+        public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICUEliminarUsuario CUEliminarUsuario
+
+
         private ICULogin _cULogin;
 
         public UsuarioController(ICUAltaUsuario _CUAltaUsuario, ICUListarUsuarios CuListarUsuarios, ICULogin  _CULogin
+
       )
         {
             _cUAltaUsuario = _CUAltaUsuario;
             _CuListarUsuarios = CuListarUsuarios;
+
+            _CUEliminarUsuario = CUEliminarUsuario;
+
             _cULogin=_CULogin;
 
 
@@ -99,6 +111,11 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
 
+        public IActionResult Delete(int id)
+        {
+            _CUEliminarUsuario.EliminarUsuario(id);
+            return RedirectToAction("Index");
+        }
 
 
 

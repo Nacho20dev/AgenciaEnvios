@@ -43,11 +43,13 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
             return _context.Usuarios.Find(id);
         }
 
-        //    public void Remove(int id)
-        //    {
-        //      _context.Remove(id);
-        //        _context.SaveChanges();
-        //    }
+        public void Remove(int id)
+        {
+            Usuario AEliminar = _context.Usuarios.Find(id);
+            _context.Usuarios.Remove(AEliminar);
+            _context.SaveChanges();
+        }
+
 
 
 

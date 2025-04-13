@@ -10,7 +10,7 @@ namespace AgenciaEnvios.LogicaNegocio.InterfacesRepositorios
     {
         void Add(T nuevo);
         T FindById(int id);
-        //void Remove(int id);
+        void Remove(int id);
         List<T> FindAll();
         //void Update(T obj);
     }
