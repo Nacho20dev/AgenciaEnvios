@@ -14,8 +14,4 @@
     <Folder Include="CustomExceptions\SeguimientoExceptions\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AgenciaEnvios.LogicaAccesoDatos\AgenciaEnvios.LogicaAccesoDatos.csproj" />
-  </ItemGroup>
-
 </Project>

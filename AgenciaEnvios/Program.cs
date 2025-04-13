@@ -1,8 +1,25 @@
+using AgenciaEnvios.LogicaAccesoDatos;
+using AgenciaEnvios.LogicaAplicacion;
 using AgenciaEnvios.LogicaAccesoDatos.Repositorios;
 using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
+using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("AgenciaEnvios");//DefaultConnection debe coincidir con el nombre designado en el JSON.
+
+builder.Services.AddDbContext<ApplicationDBContext>(
+    options => options.UseSqlServer(
+        connectionString,
+        sqlOptions => sqlOptions.MigrationsAssembly("AgenciaEnvios.LogicaAccesoDatos")
+    )
+);
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -11,10 +28,12 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
+
 //DI - CASOS USO
 
 
-//builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
+
+builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
 
 var app = builder.Build();
 
