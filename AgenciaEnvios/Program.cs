@@ -37,6 +37,8 @@ builder.Services.AddScoped<ICULogin, CULogin>();
 builder.Services.AddScoped<ICUAltaUsuario, CUAltaUsuario>();
 builder.Services.AddScoped<ICUListarUsuarios, CUListarUsuarios>();
 builder.Services.AddScoped<ICUEliminarUsuario, CUEliminarUsuario>();
+builder.Services.AddScoped<ICUEditarUsuario, CUEditarUsuario>();
+builder.Services.AddScoped<ICUObtenerUsuario, CUObtenerUsuario>();
 
 builder.Services.AddSession();
 var app = builder.Build();

@@ -35,7 +35,7 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
 
             try
             {
-                Usuario nuevo = MapperUsuario.DTOToUsuario(dto);
+                Usuario nuevo = MapperUsuario.DTOAltaToUsuario(dto);
                 _repoUsuario.Add(nuevo);
             }
             catch (Exception e)

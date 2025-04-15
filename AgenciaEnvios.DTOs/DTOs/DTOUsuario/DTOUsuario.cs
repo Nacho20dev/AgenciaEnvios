@@ -26,8 +26,9 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
         [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El apellido solo puede contener letras y espacios.")]
         public string? Apellido { get; set; }
 
-        [Required]
-        [StringLength(32, MinimumLength = 8, ErrorMessage = "La longitud debe estar entre 8 y 32 caracteres")]
+        //Cambios respecto del DTO de alta: La contraseña no es required
+        //y el largo maximo es de 72 porque puede venir hasheada
+        [StringLength(72, MinimumLength = 8, ErrorMessage = "La longitud debe estar entre 8 y 32 caracteres")]
         public string? Contrasenia { get; set; }
 
         [Required]
@@ -36,6 +37,8 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
 
         [Required(ErrorMessage = "El rol es obligatorio.")]
         public string? Rol { get; set; }
+
+        public int? LogueadoId { get; set; }
 
 
 

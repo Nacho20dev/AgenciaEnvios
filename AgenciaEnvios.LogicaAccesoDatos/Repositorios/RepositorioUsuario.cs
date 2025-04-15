@@ -50,6 +50,14 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
             _context.SaveChanges();
         }
 
+        public int Update(Usuario usuario)
+        {
+            _context.Usuarios.Update(usuario);
+            _context.SaveChanges();
+            return usuario.Id;
+
+        }
+
 
 
 
