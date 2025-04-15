@@ -11,7 +11,12 @@ namespace AgenciaEnvios.DTOs.Mappers
 {
     public class MapperUsuario
     {
-        public static Usuario DTOToUsuario(DTOAltaUsuario dto)
+
+        //Generamos un mapper especifico para mapear un DTo a un usuario para AltaUsuario
+        //porque en el alta necesitamos hashear la contraseña y no asignamos un Id.
+        //En el DTO que no es de alta si usamos un ID y no hasheamos la contraseña porque 
+        //ya la tenemos hasheada
+        public static Usuario DTOAltaToUsuario(DTOAltaUsuario dto)
         {
            
 
@@ -24,6 +29,20 @@ namespace AgenciaEnvios.DTOs.Mappers
             return u;
         }
 
+
+        public static Usuario DTOToUsuario(DTOUsuario dto)
+        {
+            Usuario u = new Usuario(
+                dto.Nombre,
+                dto.Apellido,
+                dto.Contrasenia, // ya hasheada
+                dto.Email,
+                dto.Rol
+            );
+
+            u.Id = dto.Id ?? throw new Exception("El Id del DTO no puede ser null al editar");
+            return u;
+        }
         public static DTOUsuario UsuarioToDTOUsuario(Usuario usu)
         {
 
