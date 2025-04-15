@@ -126,16 +126,18 @@ namespace AgenciaEnvios.WebApp.Controllers
             {
                 dto.LogueadoId = HttpContext.Session.GetInt32("LogueadoId");
                 _cuEditarUsuario.EditarUsuario(dto);
+                return RedirectToAction("Index", "Usuario");
             }
             catch (NombreVacioEx e)
             {
                 ViewBag.error = e.Message;
-
+                return View(dto);
             }
             catch (ApellidoVacioEx e)
             {
 
                 ViewBag.error = e.Message;
+                return View(dto);
             }
             
 
@@ -143,11 +145,20 @@ namespace AgenciaEnvios.WebApp.Controllers
             {
 
                 ViewBag.error = e.Message;
+                return View(dto);
+            }
+
+            catch (Exception e) // <-- Excepciones no previstas
+            {
+                ViewBag.error = "Ocurrió un error inesperado. Por favor, intente nuevamente.";
+                // Opcional: loggear el error real para diagnóstico
+                Console.WriteLine(e); // O usar un logger si tenés
+                return View(dto);
             }
 
 
 
-            return View();
+
         }
 
         

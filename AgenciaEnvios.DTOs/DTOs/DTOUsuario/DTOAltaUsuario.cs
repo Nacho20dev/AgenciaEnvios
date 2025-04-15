@@ -29,7 +29,7 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
         public string? Contrasenia { get; set; }
         
         [Required(ErrorMessage = "El mail es obligatorio")]
-        [EmailAddress(ErrorMessage = "La longitud debe estar entre 8 y 32 caracteres")]
+        [EmailAddress(ErrorMessage = "Debe cumplir con formato da mail (debe contener @ y finalizar en .com).")]
         public string? Email { get; set; }
         
         [Required(ErrorMessage = "El rol es obligatorio.")]
