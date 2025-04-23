@@ -27,6 +27,7 @@ builder.Services.AddControllersWithViews();
 //DI - REPOS
 
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
 
 
 //DI - CASOS USO
