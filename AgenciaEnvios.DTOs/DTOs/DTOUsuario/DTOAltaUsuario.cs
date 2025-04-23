@@ -37,6 +37,8 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
 
         public int? LogueadoId { get; set; }
 
+        public int LogueadoId { get; set; }
+
 
 
     }

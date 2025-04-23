@@ -10,6 +10,7 @@ using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.Entidades;
 using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
+using System.Text.Json;
 
 
 namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
@@ -17,10 +18,12 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
     public class CUAltaUsuario:ICUAltaUsuario
     {
         private IRepositorioUsuario _repoUsuario;
+        private IRepositorioAuditoria _repoAuditoria;
 
-        public CUAltaUsuario(IRepositorioUsuario repoUsuario)
+        public CUAltaUsuario(IRepositorioUsuario repoUsuario, IRepositorioAuditoria repoAuditoria)
         {
             _repoUsuario = repoUsuario;
+            _repoAuditoria = repoAuditoria;
         }
 
 
@@ -37,6 +40,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             {
                 Usuario nuevo = MapperUsuario.DTOAltaToUsuario(dto);
                 _repoUsuario.Add(nuevo);
+                Auditoria aud = new Auditoria(dto.LogueadoId, "ALTA", nuevo.GetType().Name, idEntidad.ToString(), "Alta correcta" + JsonSerializer.Serialize(nuevo));
+
+                _repoAuditoria.Auditar(aud);
             }
             catch (Exception e)
             {
