@@ -4,6 +4,7 @@ using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using AgenciaEnvios.WebApp.NewFolder;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace AgenciaEnvios.WebApp.Controllers
@@ -32,6 +33,9 @@ namespace AgenciaEnvios.WebApp.Controllers
         //[LogueadoAuthorize]
         ////[FuncionarioAuthorize]
         ////[AdministradorAuthorize]
+        ///Deberíamos cambiar el index para que sea accesible a 
+        ///todos los usuarios logueados y que sea una vista general y el 
+        /// que lo programado aqui sea un listar usuario del administrador
         public IActionResult Index()
         {
             ViewBag.mensaje = TempData["mensaje"]; 
@@ -58,11 +62,57 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
             }
+
+            catch (NombreVacioEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+            catch (ApellidoVacioEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+            catch (ContraseniaVaciaEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+            catch (ContraseniaCortaEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+            catch (NoCumpleCaracteresEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+            catch (EmailInvalidoEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+            catch (UsuarioNoValidoEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+
+
+            catch (EmailYaExisteEx e)
+            {
+                ViewBag.mensaje = e.Message;
+            }
+
+
             catch (Exception ex)
             {
                 ViewBag.mensaje = ex.Message;
-                return View();
+
             }
+
+            return View();
         }
 
         public IActionResult Login()
@@ -105,7 +155,17 @@ namespace AgenciaEnvios.WebApp.Controllers
 
         public IActionResult Delete(int id)
         {
-            _cuEliminarUsuario.EliminarUsuario(id);
+            //Necesitamos tener este logueadoId porque al no trabajar con DTO en el caso de uso necesitabamos pasarle 
+            //de alguna forma el usuario logueado.
+            // Busca el "claim" que representa el identificador único del usuario logueado.
+            // Este claim suele tener el tipo "NameIdentifier" (por convención en ASP.NET).
+            // Si el claim existe, accede a su valor (un string con el ID del usuario).
+            // Si no existe (por seguridad o si el usuario no está logueado), se usa "0" como valor por defecto.
+            // Convierte ese string en un entero, ya que tu lógica probablemente necesita el ID como int.
+            int logueadoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+            
+            
+            _cuEliminarUsuario.EliminarUsuario(id, logueadoId);
             return RedirectToAction("Index", "Usuario");
         }
 

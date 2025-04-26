@@ -11,51 +11,50 @@ using System.Threading.Tasks;
 namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
 {
     public class RepositorioUsuario : IRepositorioUsuario
+{
+    private ApplicationDBContext _context;
+    public RepositorioUsuario(ApplicationDBContext context)
     {
-        private ApplicationDBContext _context;
-        public RepositorioUsuario(ApplicationDBContext context)
-        {
-            _context = context;
-        }
+        _context = context;
+    }
 
-        public void Add(Usuario nuevo)
+    public int Add(Usuario nuevo)
+    {
+        _context.Usuarios.Add(nuevo);
+        _context.SaveChanges();
+        return nuevo.Id;
+    }
+
+    public List<Usuario> FindAll()
+    {
+        return _context.Usuarios.ToList();
+    }
+
+
+
+    public Usuario FindByEmail(string email)
+    {
+        if (email == null) throw new ArgumentException("Datos incorrectos");
+        return _context.Usuarios.SingleOrDefault(x => x.Email == email);
+    }
+
+
+    public Usuario FindById(int id)
+    {
+        return _context.Usuarios.Find(id);
+    }
+
+        public int Remove(int id)
         {
-            _context.Usuarios.Add(nuevo);
+            var usuario = FindById(id);
+            if (usuario == null)
+            {
+                throw new InvalidOperationException($"No se encontró un usuario con ID {id}.");
+            }
+
+            _context.Usuarios.Remove(usuario);
             _context.SaveChanges();
-        }
-
-        public List<Usuario> FindAll()
-        {
-            return _context.Usuarios.ToList();
-        }
-
-
-
-        public Usuario FindByEmail(string email)
-        {
-            if (email == null) throw new ArgumentException("Datos incorrectos");
-            return _context.Usuarios.SingleOrDefault(x => x.Email == email);
-        }
-
-
-        public Usuario FindById(int id)
-        {
-            return _context.Usuarios.Find(id);
-        }
-
-        public void Remove(int id)
-        {
-            Usuario AEliminar = _context.Usuarios.Find(id);
-            _context.Usuarios.Remove(AEliminar);
-            _context.SaveChanges();
-        }
-
-        public int Update(Usuario usuario)
-        {
-            _context.Usuarios.Update(usuario);
-            _context.SaveChanges();
-            return usuario.Id;
-
+            return id;
         }
 
 
@@ -65,25 +64,42 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
         //    //verifica que no deje ningún dato de los editables vacio
         //    //y lo agrega al context. 
         //    //Ver si vamos a agregar rol para caso administrador. Sino estaría pronto!
-        //    public void Update(Usuario usu)
-        //    {
-        //        var usuario = _context.Usuarios.SingleOrDefault(u => u._email == usu._email);
+        public int Update(Usuario usu)
+        {
 
-        //        if (usuario == null)
-        //            throw new InvalidOperationException("Usuario no encontrado.");
+//            var usuario = _context.Usuarios.SingleOrDefault(u => u.Email== usu.Email);
+//          Cambiamos Email por Id ya que si lo que cambiamos es el mail nos tira una excepción porque 
+//          obviamente encuentra que es distitno
+            var usuario = _context.Usuarios.SingleOrDefault(u => u.Id == usu.Id);
 
-        //        if (string.IsNullOrEmpty(usuario._nombre))
-        //            throw new NombreVacioEx();
+            if (usuario == null)
+              throw new InvalidOperationException("Usuario no encontrado.");
 
-        //        if (string.IsNullOrEmpty(usuario._apellido))
-        //            throw new ApellidoVacioEx();
+            if (string.IsNullOrEmpty(usuario.Nombre))
+                throw new NombreVacioEx();
 
-        //        usuario._nombre = usu._nombre;
-        //        usuario._apellido = usu._apellido;
+            if (string.IsNullOrEmpty(usuario.Apellido))
+                throw new ApellidoVacioEx();
+
+            usuario.Nombre = usu.Nombre;
+            usuario.Apellido = usu.Apellido;
+            usuario.Email = usu.Email;
 
 
-        //        _context.SaveChanges();
-        //    }
-        //}
+            _context.SaveChanges();
+            return usuario.Id;
+        }
+
+        public bool EsAdmin(int? id) 
+        {
+            bool retorno=false;
+            Usuario usu=FindById(id);
+            if (usu.Rol == "Administrador") 
+            {
+            retorno = true;
+            }
+            return retorno;
+        }
     }
 }
+

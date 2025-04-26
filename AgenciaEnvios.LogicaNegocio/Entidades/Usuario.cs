@@ -10,12 +10,11 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 {
     public class Usuario
     {
-        
-        public int Id {  get; set; }
+
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Contrasenia { get; set; }
-
         public string Email { get; set; }
         public string Rol { get; set; }
 
@@ -35,7 +34,7 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 
         public Usuario()
         {
-            
+
         }
 
         public void Validar()
@@ -55,12 +54,12 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
                 throw new ContraseniaVaciaEx("La contraseña no puede estar vacia");
             }
 
-            if(Contrasenia.Length <8)
+            if (Contrasenia.Length < 8)
             {
                 throw new ContraseniaCortaEx("La contraseña debe tener 8 caracteres como mínimo");
             }
 
-            
+
             bool CumpleCaracteres(string input)
             {
                 bool tieneMayuscula = false;
@@ -90,16 +89,18 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 
 
 
-            if(!Email.Contains("@") && !Email.EndsWith(".com"))
+            if (!Email.Contains("@") && !Email.EndsWith(".com"))
             {
                 throw new EmailInvalidoEx("El email debe contener arroba y terminar en .com");
             }
 
 
-            if(Rol != "Administrador" && Rol != "Funcionario" && Rol != "Cliente")
+            if (Rol != "Administrador" && Rol != "Funcionario" && Rol != "Cliente")
             {
                 throw new UsuarioNoValidoEx("Debe seleccionar un usuario");
             }
+
+
         }
 
 

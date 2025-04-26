@@ -8,7 +8,7 @@ namespace AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario
 {
     public interface ICUEliminarUsuario
     {
-        void EliminarUsuario(int id);
+        void EliminarUsuario(int id, int logueado);
     }
 
 }

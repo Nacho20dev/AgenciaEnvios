@@ -8,9 +8,9 @@ namespace AgenciaEnvios.LogicaNegocio.InterfacesRepositorios
 {
     public interface IRepositorio<T> where T : class
     {
-        void Add(T nuevo);
+        int Add(T nuevo);
         T FindById(int id);
-        void Remove(int id);
+        int Remove(int id);
         List<T> FindAll();
 
         int Update(T obj);
