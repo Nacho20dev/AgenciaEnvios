@@ -52,6 +52,10 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Envio" asp-action="ListarEnvios">Lista de Envios</a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>
                                 </li>
                                
@@ -59,7 +63,17 @@
                             }
                             else
                             {
-                                //Botones solo para cliente
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Envio" asp-action="Create">Alta de Envio</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Envio" asp-action="ListarEnvios">Lista de Envios</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>
+                                </li>
                             }
 
                         }

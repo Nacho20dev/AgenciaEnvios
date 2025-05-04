@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AgenciaEnvios.LogicaAccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class nueva : Migration
+    public partial class _04052025 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

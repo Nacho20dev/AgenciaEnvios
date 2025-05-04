@@ -115,8 +115,7 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
         [LogueadoAuthorize]
-        [AdministradorAuthorize]
-        public IActionResult Edit(int id)
+         public IActionResult Edit(int id)
         {
             try
             {
@@ -136,6 +135,35 @@ namespace AgenciaEnvios.WebApp.Controllers
                 ViewBag.error = "Ocurrió un error inesperado. Por favor, intente nuevamente.";
                 
                 return RedirectToAction("Index", "Envio");
+            }
+        }
+
+
+        [LogueadoAuthorize]
+        public IActionResult ListarEnvios()
+        {
+            try
+            {
+
+                List<DTOAltaEnvio> envios = _cuListarEnvios.ListarEnvios();
+
+
+                ViewBag.mensaje = TempData["mensaje"];
+
+
+                return View(envios);
+            }
+            catch (EnvioAMostrarVacioEx ex)
+            {
+
+                ViewBag.Mensaje = ex.Message;
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Mensaje = ex.Message;
+                return View();
             }
         }
 
