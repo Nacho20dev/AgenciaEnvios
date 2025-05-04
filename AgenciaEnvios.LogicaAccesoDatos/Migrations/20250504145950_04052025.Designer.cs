@@ -13,8 +13,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgenciaEnvios.LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250502232334_nueva")]
-    partial class nueva
+    [Migration("20250504145950_04052025")]
+    partial class _04052025
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -204,7 +204,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Migrations
                 {
                     b.HasBaseType("AgenciaEnvios.LogicaNegocio.Entidades.Envio");
 
-                    b.Property<int>("AgenciaDestinoId")
+                    b.Property<int?>("AgenciaDestinoId")
                         .HasColumnType("int");
 
                     b.HasIndex("AgenciaDestinoId");
@@ -307,8 +307,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Migrations
                     b.HasOne("AgenciaEnvios.LogicaNegocio.Entidades.Agencia", "AgenciaDestino")
                         .WithMany()
                         .HasForeignKey("AgenciaDestinoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("AgenciaDestino");
                 });

@@ -9,98 +9,73 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
 {
     public class MapperEnvio
     {
-       public static Envio FromDtoAltaEnvioToEnvio(DTOAltaEnvio dto, Usuario usuario, Agencia agenciaOrigen, Agencia agenciaDestino)
-{
-    Envio envioNuevo = null; // Inicializa en null para evitar posibles errores de compilación
+        public static Envio FromDtoAltaEnvioToEnvio(DTOAltaEnvio dto, Usuario usuario, Agencia agenciaOrigen, Agencia agenciaDestino)
+        {
+            Envio envioNuevo = null; // Inicializa en null para evitar posibles errores de compilación
 
-    var nroTracking = dto.NroTracking ?? Guid.NewGuid().ToString(); 
+            var nroTracking = dto.NroTracking ?? Guid.NewGuid().ToString();
 
-    if (dto.TipoEnvio.Equals("Comun", StringComparison.OrdinalIgnoreCase)) // Considera la insensibilidad a mayúsculas
-    {
-        envioNuevo = new Comun(
-            dto.Id,
-            nroTracking,
-            usuario,
-            dto.EmailCliente,
-            dto.Peso,
-            new List<Seguimiento>(),
-            agenciaOrigen,
-            agenciaOrigen.Id,
-            agenciaDestino,
-            agenciaDestino.Id
-        );
-    }
-    else if (dto.TipoEnvio.Equals("Urgente", StringComparison.OrdinalIgnoreCase)) 
-    {
-        DireccionPostal direccionPostal = new DireccionPostal(
-            dto.Destinatario,
-            dto.Calle,
-            dto.NroPuerta,
-            dto.Ciudad,
-            (int)dto.CodigoPostal,
-            dto.Departamento
-        );
+            if (dto.TipoEnvio.Equals("Comun", StringComparison.OrdinalIgnoreCase)) // Considera la insensibilidad a mayúsculas
+            {
+                envioNuevo = new Comun(
+                    dto.Id,
+                    nroTracking,
+                    usuario,
+                    dto.EmailCliente,
+                    dto.Peso,
+                    new List<Seguimiento>(),
+                    agenciaOrigen,
+                    agenciaOrigen.Id,
+                    agenciaDestino,
+                    agenciaDestino.Id
+                );
+            }
+            else if (dto.TipoEnvio.Equals("Urgente", StringComparison.OrdinalIgnoreCase))
+            {
+                DireccionPostal direccionPostal = new DireccionPostal(
+                    dto.Destinatario,
+                    dto.Calle,
+                    dto.NroPuerta,
+                    dto.Ciudad,
+                    (int)dto.CodigoPostal,
+                    dto.Departamento
+                );
 
-        envioNuevo = new Urgente(
-            dto.Id,
-            nroTracking, 
-            usuario,
-            dto.EmailCliente,
-            dto.Peso,
-            new List<Seguimiento>(),
-            agenciaOrigen,
-            agenciaOrigen.Id,
-            direccionPostal,
-            dto.Eficiente
-        );
-    }
+                envioNuevo = new Urgente(
+                    dto.Id,
+                    nroTracking,
+                    usuario,
+                    dto.EmailCliente,
+                    dto.Peso,
+                    new List<Seguimiento>(),
+                    agenciaOrigen,
+                    agenciaOrigen.Id,
+                    direccionPostal,
+                    dto.Eficiente
+                );
+            }
             if (envioNuevo is Urgente urgenteEnvio && urgenteEnvio.DireccionPostal == null)
             {
                 throw new NullReferenceException("La dirección postal no fue asignada correctamente.");
             }
 
             return envioNuevo;
-
-
-}
-
-        public static List<DTOAltaEnvio> FromListEnvioToListDtoEnvio(List<Envio> envios)
+        }
+        public static List<DTOAltaEnvio> FromListEnvioToListDTOEnvio(List<Envio> envios)
         {
             List<DTOAltaEnvio> ret = new List<DTOAltaEnvio>();
 
             foreach (Envio envio in envios)
             {
-                DTOAltaEnvio dto = new DTOAltaEnvio
-                {
-                    NroTracking = envio.NroTracking,
-                    IdLogueado = envio.Usuario.Id,
-                    EmailCliente = envio.EmailCliente,
-                    Peso = envio.Peso,
-                    Estado = envio.Estado,
-                    AgenciaOrigen = envio.AgenciaOrigen,
-                    FechaInicio = envio.FechaInicio
-                };
-
-                if (envio is Comun comunEnvio)
-                {
-                    dto.AgenciaDestino = comunEnvio.AgenciaDestino;
-                }
-
-                if (envio is Urgente urgenteEnvio)
-                {
-                    dto.Destinatario = urgenteEnvio.DireccionPostal.Destinatario;
-                    dto.Calle = urgenteEnvio.DireccionPostal.Calle;
-                    dto.NroPuerta = urgenteEnvio.DireccionPostal.Numero;
-                    dto.Ciudad = urgenteEnvio.DireccionPostal.Ciudad;
-                    dto.CodigoPostal = urgenteEnvio.DireccionPostal.CodigoPostal;
-                    dto.Departamento = urgenteEnvio.DireccionPostal.Departamento;
-                }
-
-                ret.Add(dto);
+                ret.Add(EnvioToDTOEnvio(envio));
             }
 
             return ret;
         }
+
+
+    
+
 
         public static DTOAltaEnvio EnvioToDTOEnvio(Envio envio)
         {
