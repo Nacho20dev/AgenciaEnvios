@@ -10,11 +10,7 @@
     <Folder Include="CasosUso\CUComun\" />
     <Folder Include="CasosUso\CUSeguimiento\" />
     <Folder Include="CasosUso\CUUrgente\" />
-    <Folder Include="CasosUso\CUAgencia\" />
-    <Folder Include="CasosUso\CUEnvio\" />
-    <Folder Include="ICasosUso\ICUAgencia\" />
     <Folder Include="ICasosUso\ICUComun\" />
-    <Folder Include="ICasosUso\ICUEnvio\" />
     <Folder Include="ICasosUso\ICUSeguimiento\" />
     <Folder Include="ICasosUso\ICUUrgente\" />
   </ItemGroup>

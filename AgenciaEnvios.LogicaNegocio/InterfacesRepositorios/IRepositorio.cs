@@ -9,7 +9,7 @@ namespace AgenciaEnvios.LogicaNegocio.InterfacesRepositorios
     public interface IRepositorio<T> where T : class
     {
         int Add(T nuevo);
-        T FindById(int id);
+        T FindById(int? id);
         int Remove(int id);
         List<T> FindAll();
 

@@ -1,9 +1,11 @@
-﻿using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
+﻿using AgenciaEnvios.LogicaAccesoDatos.Migrations;
+using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using AgenciaEnvios.LogicaNegocio.Entidades;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,18 +33,28 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
     }
 
 
-
-    public Usuario FindByEmail(string email)
+        //    //Recibe un usuario previamente mapeado. Lo busca por mail,
+        //    //verifica que no deje ningún dato de los editables vacio
+        //    //y lo agrega al context. 
+        public Usuario FindByEmail(string email)
     {
         if (email == null) throw new ArgumentException("Datos incorrectos");
         return _context.Usuarios.SingleOrDefault(x => x.Email == email);
     }
 
 
-    public Usuario FindById(int id)
+    public Usuario FindById(int? id)
     {
         return _context.Usuarios.Find(id);
     }
+
+        public string GetNombreCompleto(int id)
+        {
+            Usuario u = FindById(id);
+            string NombreCompleto = u.Nombre + " " + u.Apellido;
+            return NombreCompleto;
+            
+        }
 
         public int Remove(int id)
         {
@@ -60,16 +72,12 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
 
 
 
-        //    //Recibe un usuario previamente mapeado. Lo busca por mail,
-        //    //verifica que no deje ningún dato de los editables vacio
-        //    //y lo agrega al context. 
-        //    //Ver si vamos a agregar rol para caso administrador. Sino estaría pronto!
+      
+
         public int Update(Usuario usu)
         {
 
-//            var usuario = _context.Usuarios.SingleOrDefault(u => u.Email== usu.Email);
-//          Cambiamos Email por Id ya que si lo que cambiamos es el mail nos tira una excepción porque 
-//          obviamente encuentra que es distitno
+
             var usuario = _context.Usuarios.SingleOrDefault(u => u.Id == usu.Id);
 
             if (usuario == null)
@@ -93,12 +101,22 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
         public bool EsAdmin(int? id) 
         {
             bool retorno=false;
-            Usuario usu=FindById(id);
+            Usuario usu=FindById((int)id);
             if (usu.Rol == "Administrador") 
             {
             retorno = true;
             }
             return retorno;
+        }
+
+        public void ValidarFormatoEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email) ||
+                !email.Contains("@") ||
+                !email.EndsWith(".com"))
+            {
+                throw new EmailInvalidoEx("El email debe contener '@' y terminar en '.com'");
+            }
         }
     }
 }

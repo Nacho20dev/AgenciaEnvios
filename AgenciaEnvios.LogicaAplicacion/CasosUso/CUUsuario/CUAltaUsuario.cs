@@ -11,6 +11,7 @@ using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.Entidades;
 using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using System.Text.Json;
+using AgenciaEnvios.LogicaNegocio.CustomExceptions.EnvioExceptions;
 
 
 namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario

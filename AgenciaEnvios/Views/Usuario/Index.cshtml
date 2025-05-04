@@ -1,50 +1,7 @@
-﻿@model IEnumerable<AgenciaEnvios.DTOs.DTOs.DTOUsuario.DTOUsuario>
-
-@{
-    ViewData["Title"] = "Listado de Usuarios";
+﻿@{
+    ViewData["Title"] = "Inicio";
 }
 
-<h1>Listado de Usuarios</h1>
-
-@if (ViewBag.mensaje != null)
-{
-    <div class="alert alert-success">
-        @ViewBag.mensaje
-    </div>
-}
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Agregar nuevo usuario</a>
-</p>
-
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.First().Id)</th>
-            <th>@Html.DisplayNameFor(model => model.First().Nombre)</th>
-            <th>@Html.DisplayNameFor(model => model.First().Apellido)</th>
-            <th>@Html.DisplayNameFor(model => model.First().Contrasenia)</th>
-            <th>@Html.DisplayNameFor(model => model.First().Email)</th>
-            <th>@Html.DisplayNameFor(model => model.First().Rol)</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Nombre</td>
-                <td>@item.Apellido</td>
-                <td>@item.Contrasenia</td>
-                <td>@item.Email</td>
-                <td>@item.Rol</td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container mt-5">
+    <h2>Bienvenido, @ViewData["NombreUsuario"]!</h2>
+</div>

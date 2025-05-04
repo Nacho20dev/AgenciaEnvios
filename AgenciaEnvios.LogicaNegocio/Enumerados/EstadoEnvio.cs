@@ -8,5 +8,7 @@ namespace AgenciaEnvios.LogicaNegocio.Enumerados
 {
     public enum EstadoEnvios
     {
+        En_Proceso,
+        Finalizado
     }
 }

@@ -19,7 +19,7 @@ namespace AgenciaEnvios.WebApp.Controllers
         private readonly ICUEditarUsuario _cuEditarUsuario;
 
         public UsuarioController(ICUAltaUsuario cuAltaUsuario, ICUListarUsuarios cuListarUsuarios,
-            ICULogin cuLogin, ICUEliminarUsuario cuEliminarUsuario,ICUObtenerUsuario cuObtenerUsuario,
+            ICULogin cuLogin, ICUEliminarUsuario cuEliminarUsuario, ICUObtenerUsuario cuObtenerUsuario,
             ICUEditarUsuario cuEditarUsuario)
         {
             _cuAltaUsuario = cuAltaUsuario;
@@ -36,18 +36,65 @@ namespace AgenciaEnvios.WebApp.Controllers
         ///Deberíamos cambiar el index para que sea accesible a 
         ///todos los usuarios logueados y que sea una vista general y el 
         /// que lo programado aqui sea un listar usuario del administrador
+
+
+    
+
+        [LogueadoAuthorize]
         public IActionResult Index()
         {
-            ViewBag.mensaje = TempData["mensaje"]; 
-            return View(_cuListarUsuarios.ListarUsuarios()); 
+            string? nombreUsuario = HttpContext.Session.GetString("NombreUsuario");
+
+            if (string.IsNullOrEmpty(nombreUsuario))
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+
+            ViewData["NombreUsuario"] = nombreUsuario;
+
+            return View();
         }
 
 
-        //[LogueadoAuthorize]
-        //[AdministradorAuthorize]
+
+
+
+
+        public IActionResult ListarUsuarios()
+        {
+            try
+            {
+
+                List<DTOUsuario> usuarios = _cuListarUsuarios.ListarUsuarios();
+
+
+                ViewBag.mensaje = TempData["mensaje"];
+
+
+                return View(usuarios);
+            }
+            catch (UsuarioNoAdministradorEx ex)
+            {
+
+                ViewBag.Mensaje = ex.Message;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Mensaje = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        
+
+
+
+        [LogueadoAuthorize]
+        [AdministradorAuthorize]
         public IActionResult Create()
         {
-            return View(new DTOAltaUsuario()); 
+            return View(new DTOAltaUsuario());
         }
 
         [HttpPost]
@@ -106,6 +153,7 @@ namespace AgenciaEnvios.WebApp.Controllers
             }
 
 
+
             catch (Exception ex)
             {
                 ViewBag.mensaje = ex.Message;
@@ -117,6 +165,8 @@ namespace AgenciaEnvios.WebApp.Controllers
 
         public IActionResult Login()
         {
+
+            ViewBag.msj = HttpContext.Session.GetInt32("LogueadoId");
             return View();
         }
 
@@ -126,14 +176,15 @@ namespace AgenciaEnvios.WebApp.Controllers
         {
             try
             {
-                
                 DTOUsuario b = _cuLogin.VerificarDatosParaLogin(dto);
                 HttpContext.Session.SetInt32("LogueadoId", (int)b.Id);
                 HttpContext.Session.SetString("LogueadoRol", b.Rol);
+                HttpContext.Session.SetString("NombreUsuario", b.Nombre);
+
                 switch (b.Rol)
                 {
                     case "Administrador":
-                        return RedirectToAction("Index", "Usuario"); // Controlador y acción
+                        return RedirectToAction("Index", "Usuario");
                     case "Empleado":
                         return RedirectToAction("Index", "Usuario");
                     case "Cliente":
@@ -141,17 +192,25 @@ namespace AgenciaEnvios.WebApp.Controllers
                     default:
                         return RedirectToAction("Index", "Usuario");
                 }
-
             }
             catch (Exception ex)
             {
                 ViewBag.mensaje = ex.Message;
                 return View();
             }
+
+           
             return View();
         }
 
 
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Usuario");
+        }
+       
 
         public IActionResult Delete(int id)
         {
@@ -161,10 +220,10 @@ namespace AgenciaEnvios.WebApp.Controllers
             // Este claim suele tener el tipo "NameIdentifier" (por convención en ASP.NET).
             // Si el claim existe, accede a su valor (un string con el ID del usuario).
             // Si no existe (por seguridad o si el usuario no está logueado), se usa "0" como valor por defecto.
-            // Convierte ese string en un entero, ya que tu lógica probablemente necesita el ID como int.
+            // Convierte ese string en un entero, ya que la lógica probablemente necesita el ID como int.
             int logueadoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
-            
-            
+
+
             _cuEliminarUsuario.EliminarUsuario(id, logueadoId);
             return RedirectToAction("Index", "Usuario");
         }
@@ -173,7 +232,7 @@ namespace AgenciaEnvios.WebApp.Controllers
         public IActionResult Edit(int id)
         {
 
-            
+
             DTOUsuario model = _cuObtenerUsuario.ObtenerUsuario(id);
             return View(model);
         }
@@ -184,7 +243,7 @@ namespace AgenciaEnvios.WebApp.Controllers
         {
             try
             {
-                dto.LogueadoId = HttpContext.Session.GetInt32("LogueadoId");
+                dto.LogueadoId = (int)HttpContext.Session.GetInt32("LogueadoId");
                 _cuEditarUsuario.EditarUsuario(dto);
                 return RedirectToAction("Index", "Usuario");
             }
@@ -199,7 +258,7 @@ namespace AgenciaEnvios.WebApp.Controllers
                 ViewBag.error = e.Message;
                 return View(dto);
             }
-            
+
 
             catch (EmailInvalidoEx e)
             {
@@ -208,11 +267,10 @@ namespace AgenciaEnvios.WebApp.Controllers
                 return View(dto);
             }
 
-            catch (Exception e) // <-- Excepciones no previstas
+            catch (Exception e) 
             {
                 ViewBag.error = "Ocurrió un error inesperado. Por favor, intente nuevamente.";
-                // Opcional: loggear el error real para diagnóstico
-                Console.WriteLine(e); // O usar un logger si tenés
+               
                 return View(dto);
             }
 
@@ -221,12 +279,12 @@ namespace AgenciaEnvios.WebApp.Controllers
 
         }
 
-        
-         
 
 
-}
-    
+
+
+    }
+
 }
 
 

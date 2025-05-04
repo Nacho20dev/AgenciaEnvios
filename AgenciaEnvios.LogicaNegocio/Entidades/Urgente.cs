@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AgenciaEnvios.LogicaNegocio.Enumerados;
+using AgenciaEnvios.LogicaNegocio.VO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,22 @@ using System.Threading.Tasks;
 
 namespace AgenciaEnvios.LogicaNegocio.Entidades
 {
-   public class Urgente
+    [Serializable]
+    public class Urgente : Envio
     {
+        public DireccionPostal DireccionPostal { get; set; }
+        public bool Eficiente { get; set; }
+
+        public Urgente() : base() { } 
+        public Urgente(int id, string nroTracking, Usuario usuario, string emailCliente, double peso, 
+                       List<Seguimiento> seguimientos, Agencia agenciaOrigen, int agenciaOrigenId,DireccionPostal direccionPostal, bool eficiente
+                      )
+            : base(id, nroTracking, usuario, emailCliente, peso, seguimientos, agenciaOrigen,agenciaOrigenId)
+        {
+            DireccionPostal = direccionPostal;
+            Eficiente = eficiente;
+
+        }
     }
+
 }

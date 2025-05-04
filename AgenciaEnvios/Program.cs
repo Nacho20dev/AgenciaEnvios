@@ -1,4 +1,3 @@
-using AgenciaEnvios.LogicaAccesoDatos;
 using AgenciaEnvios.LogicaAplicacion;
 using AgenciaEnvios.LogicaAccesoDatos.Repositorios;
 using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
@@ -6,6 +5,11 @@ using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio;
+using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUEnvio;
+using AgenciaEnvios.LogicaAccesoDatos.Migrations;
+using AgenciaEnvios.LogicaAplicacion.CasosUso.CUAgencia;
+using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUAgencia;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +32,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
+builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
+builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
 
 
 
@@ -40,6 +46,15 @@ builder.Services.AddScoped<ICUListarUsuarios, CUListarUsuarios>();
 builder.Services.AddScoped<ICUEliminarUsuario, CUEliminarUsuario>();
 builder.Services.AddScoped<ICUEditarUsuario, CUEditarUsuario>();
 builder.Services.AddScoped<ICUObtenerUsuario, CUObtenerUsuario>();
+builder.Services.AddScoped<ICUAltaEnvio, CUAltaEnvio>();
+builder.Services.AddScoped<ICUObtenerEnvio, CUObtenerEnvio>();
+builder.Services.AddScoped<ICUListarEnvios, CUListarEnvios>();
+builder.Services.AddScoped<ICUObtenerAgencia, CUObtenerAgencia>();
+
+
+
+
+
 
 builder.Services.AddSession();
 var app = builder.Build();
@@ -63,10 +78,11 @@ app.UseSession();
 
 
 
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Usuario}/{action=Login}/{id?}");
 
 app.Run();
