@@ -1,0 +1,131 @@
+﻿@model AgenciaEnvios.WebApp.Models.EnvioViewModel.AltaEnvioViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["mensaje"]
+    </div>
+}
+
+@if (TempData["mensajeError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["mensajeError"]
+    </div>
+}
+
+
+
+
+
+<h1>Create</h1>
+
+<h4>Alta Envio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+           
+      
+            <div class="form-group">
+                <label asp-for="Dto.EmailCliente" class="control-label"></label>
+                <input asp-for="Dto.EmailCliente" class="form-control" />
+                <span asp-validation-for="Dto.EmailCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dto.Peso" class="control-label"></label>
+                <input asp-for="Dto.Peso" class="form-control" />
+                <span asp-validation-for="Dto.Peso" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label>Tipo de Envío</label>
+                <select class="form-select" asp-items="Model.TiposDeEnvios" asp-for="Dto.TipoEnvio">
+                </select>
+
+            </div>
+            <div>
+                <label>Agencia Origen</label>
+                <select class="form-select" asp-items="Model.AgenciasOrigen" asp-for="Dto.IdAgenciaOrigen">
+                </select>
+
+            </div>
+            
+            <div id="Comun">
+               
+
+                <div>
+                    <label>Agencia Destino</label>
+                    <select class="form-select" asp-items="Model.AgenciasDestino" asp-for="Dto.IdAgenciaDestino">
+                    </select>
+
+                </div>
+
+
+              
+            </div>
+
+            <div id="Urgente"> 
+          
+
+          
+           
+          
+            <div class="form-group">
+                <label asp-for="Dto.Destinatario" class="control-label"></label>
+                <input asp-for="Dto.Destinatario" class="form-control" />
+                <span asp-validation-for="Dto.Destinatario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dto.Calle" class="control-label"></label>
+                <input asp-for="Dto.Calle" class="form-control" />
+                <span asp-validation-for="Dto.Calle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dto.NroPuerta" class="control-label"></label>
+                <input asp-for="Dto.NroPuerta" class="form-control" />
+                <span asp-validation-for="Dto.NroPuerta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dto.Ciudad" class="control-label"></label>
+                <input asp-for="Dto.Ciudad" class="form-control" />
+                <span asp-validation-for="Dto.Ciudad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dto.CodigoPostal" class="control-label"></label>
+                <input asp-for="Dto.CodigoPostal" class="form-control" />
+                <span asp-validation-for="Dto.CodigoPostal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dto.Departamento" class="control-label"></label>
+                <input asp-for="Dto.Departamento" class="form-control" />
+                <span asp-validation-for="Dto.Departamento" class="text-danger"></span>
+            </div>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="/js/Envio/Create.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+

@@ -14,6 +14,8 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
     {
         Usuario FindByEmail(string email);
         bool EsAdmin(int? id);
+        void ValidarFormatoEmail(string email);
+        string GetNombreCompleto(int id);
     }
 
 

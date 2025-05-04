@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="CustomExceptions\ComunExceptions\" />
-    <Folder Include="CustomExceptions\AgenciaExceptions\" />
-    <Folder Include="CustomExceptions\EnvioExceptions\" />
     <Folder Include="CustomExceptions\UrgenteExceptions\" />
     <Folder Include="CustomExceptions\SeguimientoExceptions\" />
   </ItemGroup>

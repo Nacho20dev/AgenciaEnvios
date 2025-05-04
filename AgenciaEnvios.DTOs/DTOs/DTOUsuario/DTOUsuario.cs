@@ -12,14 +12,14 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
     public class DTOUsuario
     {
 
-        public int? Id {  get; set; }
+        public int Id {  get; set; }
 
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]
         [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", ErrorMessage = "El nombre solo puede contener letras y espacios.")]
 
-        public string? Nombre { get; set; }
+        public string Nombre { get; set; }
 
         [Required(ErrorMessage = "El apellido es obligatorio.")]
         [StringLength(50, ErrorMessage = "El apellido no puede superar los 50 caracteres.")]

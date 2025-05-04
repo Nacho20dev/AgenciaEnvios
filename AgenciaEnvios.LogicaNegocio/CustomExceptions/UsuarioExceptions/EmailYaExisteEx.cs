@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions
 {
-    public class EmailYaExisteEx:Exception
+    public class EmailYaExisteEx : Exception
     {
         public EmailYaExisteEx()
-           : base("El nombre del usuario no puede estar vacío.") { }
+           : base("Datos incorrectos.") { }
 
         public EmailYaExisteEx(string? message)
             : base(message) { }

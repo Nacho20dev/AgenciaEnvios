@@ -60,18 +60,7 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
                 _repoAuditoria.Auditar(aud);
                 throw e;
             }
-            //Validación de contraseña no iría porque
-            //no se puede editar contraseña en el edit de datos, no?
-
-            //catch (ContraseniaCortaEx e)
-            //{
-            //    throw e;
-            //}
-
-            //catch (ContraseniaVaciaEx e) 
-            //{
-            //    throw e;
-            //}
+           
 
             catch (EmailInvalidoEx e) 
             {
@@ -105,5 +94,8 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             }
 
         }
+
+       
+
     }
 }

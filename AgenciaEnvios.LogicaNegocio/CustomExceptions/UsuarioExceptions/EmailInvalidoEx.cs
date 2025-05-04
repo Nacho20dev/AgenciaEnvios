@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions
 {
-    public class EmailInvalidoEx:Exception
+    public class EmailInvalidoEx : Exception
     {
-        public EmailInvalidoEx(string? message):base(message) { }
-        
-            
-        
+        public EmailInvalidoEx(string? message) : base(message) { }
+
+
+
     }
 }

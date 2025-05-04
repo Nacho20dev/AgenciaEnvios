@@ -40,7 +40,7 @@ namespace AgenciaEnvios.DTOs.Mappers
                 dto.Rol
             );
 
-            u.Id = dto.Id ?? throw new Exception("El Id del DTO no puede ser null al editar");
+            u.Id = dto.Id;  throw new Exception("El Id del DTO no puede ser null al editar");
             return u;
         }
         public static DTOUsuario UsuarioToDTOUsuario(Usuario usu)
