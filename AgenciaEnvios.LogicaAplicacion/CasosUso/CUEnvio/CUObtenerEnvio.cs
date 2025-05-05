@@ -16,9 +16,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
     {
         private IRepositorioEnvio _repositorioEnvio;
 
-        public CUObtenerEnvio(IRepositorioEnvio _repositorioEnvio)
+        public CUObtenerEnvio(IRepositorioEnvio repositorioEnvio)
         {
-            _repositorioEnvio = _repositorioEnvio;
+            _repositorioEnvio = repositorioEnvio;
         }
         public DTOAltaEnvio ObtenerEnvio(int id)
         {

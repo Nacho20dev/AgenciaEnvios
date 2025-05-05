@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AgenciaEnvios.LogicaNegocio.Entidades
 {
     [Serializable]
-    public class Envio
+    public abstract class Envio
     {
         public int Id { get; set; }
         public string NroTracking { get; set; }
@@ -86,8 +86,7 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
             }
         }
 
-
-
-
+        public abstract void FinalizarEnvio(Usuario usuario);
+        
     }
 }

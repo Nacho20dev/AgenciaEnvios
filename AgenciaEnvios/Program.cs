@@ -50,6 +50,9 @@ builder.Services.AddScoped<ICUAltaEnvio, CUAltaEnvio>();
 builder.Services.AddScoped<ICUObtenerEnvio, CUObtenerEnvio>();
 builder.Services.AddScoped<ICUListarEnvios, CUListarEnvios>();
 builder.Services.AddScoped<ICUObtenerAgencia, CUObtenerAgencia>();
+builder.Services.AddScoped<ICUObtenerObjetoEnvio, CUObtenerObjetoEnvio>();
+builder.Services.AddScoped<ICUFinalizarEnvio, CUFinalizarEnvio>();
+
 
 
 

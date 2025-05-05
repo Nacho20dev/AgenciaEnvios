@@ -32,6 +32,7 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOEnvio
 
         public EstadoEnvios Estado { get; set; }
 
+        public string? EnProceso { get; set; }
         public string TipoEnvio { get; set; }
 
         public List<Seguimiento> Seguimientos { get; set; }
