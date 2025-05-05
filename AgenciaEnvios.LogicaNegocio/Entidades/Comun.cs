@@ -21,6 +21,19 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
             AgenciaDestinoId = agenciaDestinoId;
             AgenciaDestino = agenciaDestino;
         }
+
+        public override void FinalizarEnvio(Usuario usuario)
+        {
+            FechaFin = DateTime.Now;
+            Estado = EstadoEnvios.Finalizado;
+
+            Seguimientos.Add(new Seguimiento
+            {
+                Comentario = "Envio entregado",
+                Usuario = usuario,
+                Fecha = FechaFin.Value
+            });
+        }
     }
 
 }

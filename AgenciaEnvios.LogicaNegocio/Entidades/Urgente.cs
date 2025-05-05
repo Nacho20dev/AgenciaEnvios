@@ -24,6 +24,23 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
             Eficiente = eficiente;
 
         }
+
+        public override void FinalizarEnvio(Usuario usuario)
+        {
+            FechaFin = DateTime.Now;
+            Estado = EstadoEnvios.Finalizado;
+
+            Seguimientos.Add(new Seguimiento
+            {
+                Comentario = "Envio entregado",
+                Usuario = usuario,
+                Fecha = FechaFin.Value
+            });
+
+            TimeSpan diferencia = FechaFin.Value - FechaInicio;
+            Eficiente = diferencia.TotalHours <= 24;
+        }
+
     }
 
 }

@@ -77,7 +77,10 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        
+    if(item.EnProceso=="En_Proceso"){
+    
+    <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
@@ -95,7 +98,7 @@
                 @Html.DisplayFor(modelItem => item.Peso)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
+               En proceso
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TipoEnvio)
@@ -134,10 +137,16 @@
                 @Html.DisplayFor(modelItem => item.Eficiente)
             </td>
             <td>
-                @Html.ActionLink("Agregar Seguimiento", "EditSeguimiento", new { id=item.Id }) |
+                @Html.ActionLink("Agregar Seguimiento", "CreateSeguimiento", new { id=item.Id }) |
+                    
+            </td>
+
+            <td>
+                @Html.ActionLink("Finalizar envío", "Finalizar", new { id = item.Id }) |
                 
             </td>
         </tr>
+            }
 }
     </tbody>
 </table>

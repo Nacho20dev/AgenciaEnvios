@@ -1,4 +1,5 @@
 ﻿using AgenciaEnvios.LogicaAccesoDatos.Migrations;
+using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using AgenciaEnvios.LogicaNegocio.Entidades;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
             return _context.Envios.ToList();
         }
 
-        public Envio FindById(int id)
+        public Envio FindById(int? id)
         {
            
             var urgente = _context.Urgentes
@@ -51,10 +52,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
             return comun;
         }
 
-        public Envio FindById(int? id)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Envio FindByNroTracking(string nroTracking)
         {
@@ -68,8 +66,21 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
 
         public int Update(Envio obj)
         {
-            throw new NotImplementedException();
+
+            var envio = _context.Usuarios.SingleOrDefault(e => e.Id == obj.Id);
+
+            if (envio == null)
+                throw new InvalidOperationException("Usuario no encontrado.");
+
+
+
+            _context.SaveChanges();
+            return envio.Id;
+        }
+
+
+
         }
     }
 
-}
+

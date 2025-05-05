@@ -1,6 +1,7 @@
 ﻿using AgenciaEnvios.DTOs.DTOs.DTOAgencia;
 using AgenciaEnvios.DTOs.DTOs.DTOEnvio;
 using AgenciaEnvios.LogicaNegocio.Entidades;
+using AgenciaEnvios.LogicaNegocio.Enumerados;
 using AgenciaEnvios.LogicaNegocio.VO;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
@@ -86,6 +87,7 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
                 EmailCliente = envio.EmailCliente,
                 Peso = envio.Peso,
                 Estado = envio.Estado,
+               
                 Seguimientos = envio.Seguimientos,
                 FechaInicio = envio.FechaInicio,
                 FechaFin = envio.FechaFin,
@@ -107,6 +109,11 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
                 dto.CodigoPostal = urgente.DireccionPostal.CodigoPostal;
                 dto.Departamento = urgente.DireccionPostal.Departamento;
             }
+            dto.EnProceso=envio.Estado.ToString();
+            //if (envio.Estado == EstadoEnvios.En_Proceso)
+            //{
+            //    dto.EnProceso = "En Proceso";
+            //}
 
             return dto;
         }
