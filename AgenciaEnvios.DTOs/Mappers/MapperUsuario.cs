@@ -18,7 +18,7 @@ namespace AgenciaEnvios.DTOs.Mappers
         //ya la tenemos hasheada
         public static Usuario DTOAltaToUsuario(DTOAltaUsuario dto)
         {
-           
+          
 
             string passHashed = Utilidades.Crypto.HashPasswordConBcrypt(dto.Contrasenia, 12);
 
@@ -40,7 +40,7 @@ namespace AgenciaEnvios.DTOs.Mappers
                 dto.Rol
             );
 
-            u.Id = dto.Id;  throw new Exception("El Id del DTO no puede ser null al editar");
+            u.Id = dto.Id;
             return u;
         }
         public static DTOUsuario UsuarioToDTOUsuario(Usuario usu)

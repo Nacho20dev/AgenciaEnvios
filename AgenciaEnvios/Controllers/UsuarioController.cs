@@ -1,6 +1,7 @@
 using AgenciaEnvios.DTOs.DTOs.DTOUsuario;
 using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
+using AgenciaEnvios.LogicaNegocio.CustomExceptions.LoginExceptions;
 using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using AgenciaEnvios.WebApp.NewFolder;
 using Microsoft.AspNetCore.Mvc;
@@ -59,7 +60,8 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
 
-
+        [LogueadoAuthorize]
+        [AdministradorAuthorize]    
         public IActionResult ListarUsuarios()
         {
             try
@@ -83,7 +85,7 @@ namespace AgenciaEnvios.WebApp.Controllers
             {
 
                 ViewBag.Mensaje = ex.Message;
-                return RedirectToAction("Index");
+                return RedirectToAction("ListarUsuarios");
             }
         }
         
@@ -102,62 +104,61 @@ namespace AgenciaEnvios.WebApp.Controllers
         {
             try
             {
-                _cuAltaUsuario.AltaUsuario(dto);
-                ViewBag.mensaje = "Alta correcta";
-                return View(new DTOAltaUsuario());
+                // Recupera el ID del administrador logueado de la sesión
+                int? logueadoId = HttpContext.Session.GetInt32("LogueadoId");
 
+                // Verifica si el ID del administrador se encontró en la sesión
+                if (logueadoId.HasValue)
+                {
+                    // Asigna el ID del administrador al DTO
+                    dto.LogueadoId = logueadoId.Value;
 
-
+                    _cuAltaUsuario.AltaUsuario(dto);
+                    TempData["AltaCorrecta"] = "Alta correcta";
+                    return RedirectToAction("ListarUsuarios");
+                }
+                else
+                {
+                    // Si no se encuentra el ID en la sesión, algo anda mal con la autenticación
+                    ViewBag.mensaje = "Error: No se pudo obtener el ID del administrador logueado.";
+                    return View(); // O podrías redirigir a una página de error
+                }
             }
-
             catch (NombreVacioEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
             catch (ApellidoVacioEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
             catch (ContraseniaVaciaEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
             catch (ContraseniaCortaEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
             catch (NoCumpleCaracteresEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
             catch (EmailInvalidoEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
             catch (UsuarioNoValidoEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
-
-
             catch (EmailYaExisteEx e)
             {
                 ViewBag.mensaje = e.Message;
             }
-
-
-
             catch (Exception ex)
             {
                 ViewBag.mensaje = ex.Message;
-
             }
 
             return View();
@@ -177,57 +178,94 @@ namespace AgenciaEnvios.WebApp.Controllers
             try
             {
                 DTOUsuario b = _cuLogin.VerificarDatosParaLogin(dto);
-                HttpContext.Session.SetInt32("LogueadoId", (int)b.Id);
-                HttpContext.Session.SetString("LogueadoRol", b.Rol);
-                HttpContext.Session.SetString("NombreUsuario", b.Nombre);
 
-                switch (b.Rol)
+                if (b == null)
                 {
-                    case "Administrador":
-                        return RedirectToAction("Index", "Usuario");
-                    case "Empleado":
-                        return RedirectToAction("Index", "Usuario");
-                    case "Cliente":
-                        return RedirectToAction("Index", "Usuario");
-                    default:
-                        return RedirectToAction("Index", "Usuario");
+                    ViewBag.msj = "Credenciales inválidas.";
+                    return View();
                 }
+
+                if (b.Id != null) 
+                {
+                    HttpContext.Session.SetInt32("LogueadoId", (int)b.Id);
+
+                    if (!string.IsNullOrEmpty(b.Rol))
+                    {
+                        HttpContext.Session.SetString("LogueadoRol", b.Rol);
+                    }
+                    else
+                    {
+                        ViewBag.msj = "Error interno: El rol del usuario es nulo.";
+                        return View();
+                    }
+
+                    if (!string.IsNullOrEmpty(b.Nombre))
+                    {
+                        HttpContext.Session.SetString("NombreUsuario", b.Nombre);
+                    }
+                    else
+                    {
+                        ViewBag.msj = "Error interno: El nombre del usuario es nulo.";
+                        return View();
+                    }
+
+                    return RedirectToAction("Index"); 
+                }
+                else
+                {
+                    ViewBag.msj = "Error interno: El ID del usuario es nulo.";
+                    return View();
+                }
+            }
+            catch (EmailNoRegistradoEx e)
+            {
+                ViewBag.msj = e.Message;
+                return View();
+            }
+            catch (DatosNoValidosEx e)
+            {
+                ViewBag.msj = e.Message;
+                return View();
             }
             catch (Exception ex)
             {
-                ViewBag.mensaje = ex.Message;
+                ViewBag.msj = ex.Message;
                 return View();
             }
-
-           
-            return View();
+         
         }
-
-
 
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "Usuario");
         }
-       
 
-        public IActionResult Delete(int id)
+
+        public IActionResult Remove(int id) 
         {
-            //Necesitamos tener este logueadoId porque al no trabajar con DTO en el caso de uso necesitabamos pasarle 
-            //de alguna forma el usuario logueado.
-            // Busca el "claim" que representa el identificador único del usuario logueado.
-            // Este claim suele tener el tipo "NameIdentifier" (por convención en ASP.NET).
-            // Si el claim existe, accede a su valor (un string con el ID del usuario).
-            // Si no existe (por seguridad o si el usuario no está logueado), se usa "0" como valor por defecto.
-            // Convierte ese string en un entero, ya que la lógica probablemente necesita el ID como int.
-            int logueadoId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+            
+            int? logueadoId = HttpContext.Session.GetInt32("LogueadoId");
 
+            if (!logueadoId.HasValue)
+            {
+                
+                return RedirectToAction("Login"); 
+            }
 
-            _cuEliminarUsuario.EliminarUsuario(id, logueadoId);
-            return RedirectToAction("Index", "Usuario");
+         
+            try
+            {
+                _cuEliminarUsuario.EliminarUsuario(id, logueadoId.Value); 
+                TempData["Mensaje"] = "Usuario eliminado correctamente.";
+                return RedirectToAction("ListarUsuarios");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Ocurrió un error al eliminar el usuario.";
+                return View("Error");
+            }
         }
-
 
         public IActionResult Edit(int id)
         {
@@ -245,7 +283,8 @@ namespace AgenciaEnvios.WebApp.Controllers
             {
                 dto.LogueadoId = (int)HttpContext.Session.GetInt32("LogueadoId");
                 _cuEditarUsuario.EditarUsuario(dto);
-                return RedirectToAction("Index", "Usuario");
+                TempData["CambiosGuardados"] = "Cambios guardados correctamente.";
+                return  RedirectToAction("ListarUsuarios", "Usuario");
             }
             catch (NombreVacioEx e)
             {

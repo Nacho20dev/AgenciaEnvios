@@ -86,7 +86,7 @@ namespace AgenciaEnvios.WebApp.Controllers
 
                
                 TempData["mensaje"] = "Alta correcta";
-                return RedirectToAction("Create");  
+                return RedirectToAction("ListarEnvios");  
             }
             catch (UsuarioNoValidoEx e)
             {
@@ -192,6 +192,7 @@ namespace AgenciaEnvios.WebApp.Controllers
             int? vSession = HttpContext.Session.GetInt32("LogueadoId");
             Usuario u = _repositorioUsuario.FindById(vSession);
             _cuFinalizarEnvio.FinalizarEnvio(id, u);
+            TempData["MensajeFinalizado"] = "Envío finalizado correctamente.";
             return RedirectToAction("ListarEnvios");
         }
 

@@ -33,9 +33,9 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
         public string? Email { get; set; }
         
         [Required(ErrorMessage = "El rol es obligatorio.")]
-        public string? Rol { get; set; }
+        public string Rol { get; set; }
 
-        public int? LogueadoId { get; set; }
+        public int LogueadoId { get; set; }
 
      
 

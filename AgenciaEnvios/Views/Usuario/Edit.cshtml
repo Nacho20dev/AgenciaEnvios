@@ -4,14 +4,15 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>DTOAltaUsuario</h4>
+<h4>Editar Usuario</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -34,11 +35,8 @@
                 <span asp-validation-for="Rol" class="text-danger"></span>
             </div>
 
-            <input type="hidden" asp-for="Contrasenia" value="@Model.Contrasenia" />
-
-            
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -49,5 +47,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

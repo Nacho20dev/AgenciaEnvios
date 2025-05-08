@@ -31,14 +31,14 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
         [StringLength(72, MinimumLength = 8, ErrorMessage = "La longitud debe estar entre 8 y 32 caracteres")]
         public string? Contrasenia { get; set; }
 
-        [Required]
-        [EmailAddress(ErrorMessage = "La longitud debe estar entre 8 y 32 caracteres")]
+        [Required(ErrorMessage = "El mail es obligatorio")]
+        [EmailAddress(ErrorMessage = "El email no cumple el formato")]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "El rol es obligatorio.")]
-        public string? Rol { get; set; }
+        public string Rol { get; set; }
 
-        public int? LogueadoId { get; set; }
+        public int LogueadoId { get; set; }
 
 
 

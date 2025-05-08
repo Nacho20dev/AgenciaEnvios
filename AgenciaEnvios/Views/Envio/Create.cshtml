@@ -4,12 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-@if (TempData["mensaje"] != null)
-{
-    <div class="alert alert-info">
-        @TempData["mensaje"]
-    </div>
-}
+
 
 @if (TempData["mensajeError"] != null)
 {
@@ -22,9 +17,9 @@
 
 
 
-<h1>Create</h1>
 
-<h4>Alta Envio</h4>
+
+<h4>Alta de Envío</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,12 +29,12 @@
            
       
             <div class="form-group">
-                <label asp-for="Dto.EmailCliente" class="control-label"></label>
+                <label asp-for="Dto.EmailCliente" class="control-label">Email del Cliente</label>
                 <input asp-for="Dto.EmailCliente" class="form-control" />
                 <span asp-validation-for="Dto.EmailCliente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Dto.Peso" class="control-label"></label>
+                <label asp-for="Dto.Peso" class="control-label">Peso</label>
                 <input asp-for="Dto.Peso" class="form-control" />
                 <span asp-validation-for="Dto.Peso" class="text-danger"></span>
             </div>
@@ -111,15 +106,13 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 <script src="/js/Envio/Create.js"></script>
 @section Scripts {

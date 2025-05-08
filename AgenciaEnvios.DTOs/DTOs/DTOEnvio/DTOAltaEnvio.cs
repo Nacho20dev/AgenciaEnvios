@@ -22,7 +22,7 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOEnvio
 
        public string? NombreEmpleado { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El email es obligatorio")]
         [EmailAddress(ErrorMessage = "Email no cumple formato")]
         public string EmailCliente { get; set; }
 

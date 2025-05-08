@@ -93,19 +93,24 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
             usuario.Apellido = usu.Apellido;
             usuario.Email = usu.Email;
 
-
             _context.SaveChanges();
             return usuario.Id;
         }
 
-        public bool EsAdmin(int? id) 
+        public bool EsAdmin(int id)
         {
-            bool retorno=false;
-            Usuario usu=FindById((int)id);
-            if (usu.Rol == "Administrador") 
+            bool retorno = false;
+            Usuario usu = FindById(id);
+
+            if (usu != null)
             {
-            retorno = true;
+                if (usu.Rol == "Administrador")
+                {
+                    retorno = true;
+                }
             }
+         
+
             return retorno;
         }
 

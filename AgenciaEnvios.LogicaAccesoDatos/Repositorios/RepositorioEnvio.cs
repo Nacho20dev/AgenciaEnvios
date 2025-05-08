@@ -67,7 +67,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
         public int Update(Envio obj)
         {
 
-            var envio = _context.Usuarios.SingleOrDefault(e => e.Id == obj.Id);
+            var envio = _context.Envios.SingleOrDefault(e => e.Id == obj.Id);
 
             if (envio == null)
                 throw new InvalidOperationException("Usuario no encontrado.");

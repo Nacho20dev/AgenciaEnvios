@@ -33,6 +33,7 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
                 if (_repoUsuario.EsAdmin(dto.LogueadoId)  == true) 
                 { 
                 LogicaNegocio.Entidades.Usuario u = MapperUsuario.DTOToUsuario(dto);
+               
                 u.Validar();
                 int idEntidad = _repoUsuario.Update(u);
                 Auditoria aud = new Auditoria(dto.LogueadoId, "EDIT", idEntidad.ToString(), "Edit correcto: " + JsonSerializer.Serialize(u));

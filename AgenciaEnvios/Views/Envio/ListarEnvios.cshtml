@@ -4,149 +4,164 @@
     ViewData["Title"] = "ListarEnvios";
 }
 
-<h1>ListarEnvios</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<h1>Lista de Envios</h1>
+@if (TempData["MensajeFinalizado"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["MensajeFinalizado"]
+    </div>
+}
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["mensaje"]
+    </div>
+}
+
+@if (ViewBag.mensaje != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.mensaje
+    </div>
+}
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.First().Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NroTracking)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.NombreEmpleado)
+                @Html.DisplayNameFor(model => model.First().NroTracking)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmailCliente)
+                @Html.DisplayNameFor(model => model.First().NombreEmpleado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Peso)
+                @Html.DisplayNameFor(model => model.First().EmailCliente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
+                @Html.DisplayNameFor(model => model.First().Peso)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoEnvio)
+                @Html.DisplayNameFor(model => model.First().Estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdAgenciaOrigen)
+                @Html.DisplayNameFor(model => model.First().TipoEnvio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdAgenciaDestino)
+                @Html.DisplayNameFor(model => model.First().IdAgenciaOrigen)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaInicio)
+                @Html.DisplayNameFor(model => model.First().IdAgenciaDestino)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaFin)
+                @Html.DisplayNameFor(model => model.First().FechaInicio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Destinatario)
+                @Html.DisplayNameFor(model => model.First().FechaFin)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calle)
+                @Html.DisplayNameFor(model => model.First().Destinatario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NroPuerta)
+                @Html.DisplayNameFor(model => model.First().Calle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ciudad)
+                @Html.DisplayNameFor(model => model.First().NroPuerta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigoPostal)
+                @Html.DisplayNameFor(model => model.First().Ciudad)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Departamento)
+                @Html.DisplayNameFor(model => model.First().CodigoPostal)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Eficiente)
+                @Html.DisplayNameFor(model => model.First().Departamento)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.First().Eficiente)
+            </th>
             <th>Acciones</th>
-                
             <th></th>
         </tr>
-
-
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        
-    if(item.EnProceso=="En_Proceso"){
-    
-    <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NroTracking)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreEmpleado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Peso)
-            </td>
-            <td>
-               En proceso
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoEnvio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdAgenciaOrigen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdAgenciaDestino)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Destinatario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NroPuerta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ciudad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodigoPostal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Departamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Eficiente)
-            </td>
-            <td>
-                @Html.ActionLink("Agregar Seguimiento", "CreateSeguimiento", new { id=item.Id }) |
-                    
-            </td>
-
-            <td>
-                @Html.ActionLink("Finalizar envío", "Finalizar", new { id = item.Id }) |
-                
-            </td>
-        </tr>
+        @foreach (var item in Model)
+        {
+            @if (item.EnProceso == "En_Proceso")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NroTracking)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreEmpleado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Peso)
+                    </td>
+                    <td>
+                        En proceso
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoEnvio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdAgenciaOrigen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdAgenciaDestino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaFin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Destinatario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Calle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NroPuerta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ciudad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoPostal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Eficiente)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Agregar Seguimiento", "CreateSeguimiento", new { id = item.Id }) |
+                    </td>
+                    <td>
+                        @Html.ActionLink("Finalizar envío", "Finalizar", new { id = item.Id }, new { onclick = "return confirmarFinalizarEnvio('" + Url.Action("Finalizar", "Envio", new { id = item.Id }) + "');" })
+                    </td>
+                </tr>
             }
-}
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="~/js/Envio/Finalizar.js"></script>
+}

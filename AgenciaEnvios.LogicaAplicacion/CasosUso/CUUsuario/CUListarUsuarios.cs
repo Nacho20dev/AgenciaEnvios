@@ -86,7 +86,12 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
 
         public List<DTOUsuario> ListarUsuarios()
         {
-            throw new NotImplementedException();
+
+
+            List<Usuario> usuarios = _repoUsuario.FindAll();
+
+            List<DTOUsuario> listDtoParaRetornar = MapperUsuario.FromListUsuarioToListDtoUsuario(usuarios);
+            return listDtoParaRetornar;
         }
     }
 

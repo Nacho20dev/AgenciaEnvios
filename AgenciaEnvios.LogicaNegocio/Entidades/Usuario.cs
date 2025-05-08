@@ -49,16 +49,32 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
                 throw new ApellidoVacioEx();
             }
 
-            if (string.IsNullOrEmpty(Contrasenia))
+            
+
+
+            if (!Email.Contains("@") && !Email.EndsWith(".com"))
             {
-                throw new ContraseniaVaciaEx("La contraseña no puede estar vacia");
+                throw new EmailInvalidoEx("El email debe contener arroba y terminar en .com");
             }
 
-            if (Contrasenia.Length < 8)
+
+            if (Rol != "Administrador" && Rol != "Funcionario" && Rol != "Cliente")
+            {
+                throw new UsuarioNoValidoEx("Debe seleccionar un usuario");
+            }
+
+
+        }
+        public  void ValidarContrasenia(string contrasenia)
+        {
+            if (string.IsNullOrEmpty(contrasenia))
+            {
+                throw new ContraseniaVaciaEx("La contraseña no puede estar vacía.");
+            }
+            if (contrasenia.Length < 8)
             {
                 throw new ContraseniaCortaEx("La contraseña debe tener 8 caracteres como mínimo");
             }
-
 
             bool CumpleCaracteres(string input)
             {
@@ -82,27 +98,11 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
                 return tieneMayuscula && tieneMinuscula && tieneNumero && tieneEspecial;
             }
 
-            if (!CumpleCaracteres(Contrasenia))
+            if (!CumpleCaracteres(contrasenia))
             {
                 throw new NoCumpleCaracteresEx("La contraseña debe contener al menos una minúscula, una mayúscula,un número y un simbolo");
             }
-
-
-
-            if (!Email.Contains("@") && !Email.EndsWith(".com"))
-            {
-                throw new EmailInvalidoEx("El email debe contener arroba y terminar en .com");
-            }
-
-
-            if (Rol != "Administrador" && Rol != "Funcionario" && Rol != "Cliente")
-            {
-                throw new UsuarioNoValidoEx("Debe seleccionar un usuario");
-            }
-
-
         }
-
 
     }
 }

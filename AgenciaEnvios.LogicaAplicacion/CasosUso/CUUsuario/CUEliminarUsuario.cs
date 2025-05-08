@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
 {
-    public class CUEliminarUsuario : ICUEliminarUsuario
+    public class CUEliminarUsuario:ICUEliminarUsuario   
     {
-        private IRepositorioUsuario _repoUsuario;
-        private IRepositorioAuditoria _repoAuditoria;
+        private readonly IRepositorioUsuario _repoUsuario;
+        private readonly IRepositorioAuditoria _repoAuditoria;
 
         public CUEliminarUsuario(IRepositorioUsuario repoUsuario, IRepositorioAuditoria repoAuditoria)
         {
@@ -27,7 +27,7 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
         {
             try
             {
-                if (_repoUsuario.EsAdmin(logueado) == true)
+                if (_repoUsuario.EsAdmin(logueado)) // Llama al método EsAdmin del repositorio
                 {
                     // Primero busca el usuario por id
                     var usuario = _repoUsuario.FindById(id);
@@ -41,10 +41,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
                     }
 
                     // Si el usuario existe, procede con la eliminación
-
-
                     int idEntidad = _repoUsuario.Remove(id);
                     Auditoria aud = new Auditoria(logueado, "BAJA", idEntidad.ToString(), "Baja exitosa: " + JsonSerializer.Serialize(usuario));
+                    _repoAuditoria.Auditar(aud);
                 }
                 else
                 {
@@ -52,20 +51,21 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
                     _repoAuditoria.Auditar(aud);
                     throw new Exception("El usuario no es Administrador");
                 }
-
             }
-
             catch (Exception e)
             {
                 Auditoria aud = new Auditoria(logueado, "BAJA", null, "ERROR: " + e.Message);
-
                 _repoAuditoria.Auditar(aud);
                 throw e;
-
-
             }
         }
 
+  
+
+        public void EliminarUsuario(int id)
+        {
+            _repoUsuario.Remove(id);
+        }
 
     }
 }
