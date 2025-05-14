@@ -38,7 +38,8 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
            
             var urgente = _context.Urgentes
                 .Include(e => e.AgenciaOrigen)
-                .Include(e => e.DireccionPostal) 
+                .Include(e => e.DireccionPostal)
+                .Include(e => e.Seguimientos)
                 .FirstOrDefault(e => e.Id == id);
 
             if (urgente != null)
@@ -46,7 +47,8 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
 
             var comun = _context.Comunes
                 .Include(e => e.AgenciaOrigen)
-                .Include(e => e.AgenciaDestino) 
+                .Include(e => e.AgenciaDestino)
+                .Include(e => e.Seguimientos)
                 .FirstOrDefault(e => e.Id == id);
 
             return comun;
@@ -67,20 +69,19 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
         public int Update(Envio obj)
         {
 
-            var envio = _context.Envios.SingleOrDefault(e => e.Id == obj.Id);
+          //  var envio = _context.Envios.SingleOrDefault(e => e.Id == obj.Id);
 
-            if (envio == null)
+            if (obj == null)
                 throw new InvalidOperationException("Usuario no encontrado.");
 
 
 
             _context.SaveChanges();
-            return envio.Id;
+            return obj.Id;
         }
 
 
-
-        }
+    }
     }
 
 

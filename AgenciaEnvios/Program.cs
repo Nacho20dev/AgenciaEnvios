@@ -12,6 +12,7 @@ using AgenciaEnvios.LogicaAplicacion.CasosUso.CUAgencia;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUAgencia;
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("AgenciaEnvios");//DefaultConnection debe coincidir con el nombre designado en el JSON.
@@ -34,6 +35,8 @@ builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
 builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
 builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
+builder.Services.AddScoped<IRepositorioSeguimiento, RepositorioSeguimiento>();
+
 
 
 
@@ -52,6 +55,7 @@ builder.Services.AddScoped<ICUListarEnvios, CUListarEnvios>();
 builder.Services.AddScoped<ICUObtenerAgencia, CUObtenerAgencia>();
 builder.Services.AddScoped<ICUObtenerObjetoEnvio, CUObtenerObjetoEnvio>();
 builder.Services.AddScoped<ICUFinalizarEnvio, CUFinalizarEnvio>();
+builder.Services.AddScoped<ICUAgregarSeguimiento, CUAgregarSeguimiento>();
 
 
 

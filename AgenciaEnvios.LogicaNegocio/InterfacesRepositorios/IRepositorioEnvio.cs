@@ -9,8 +9,9 @@ namespace AgenciaEnvios.LogicaNegocio.InterfacesRepositorios
 {
     public interface IRepositorioEnvio : IRepositorio<Envio>
     {
-        
+
         Envio FindByNroTracking(string nroTracking);
-        
+
+
     }
 }

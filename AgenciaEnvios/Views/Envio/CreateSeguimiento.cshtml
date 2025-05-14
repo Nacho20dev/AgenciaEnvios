@@ -1,0 +1,35 @@
+﻿@model AgenciaEnvios.WebApp.Models.EnvioViewModel.AltaSeguimientoViewModel
+
+@* @{
+    ViewData["Title"] = "CreateSeguimiento";
+} *@
+
+
+
+<h4>Agregar Seguimiento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateSeguimiento">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <input type="hidden" value="@Model.DTOAltaEnvio.Id" asp-for="@Model.DTOSeguimiento.IdEnvio" />
+
+            <textarea asp-for="@Model.DTOSeguimiento.comentario">
+
+            </textarea>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

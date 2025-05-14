@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="CustomExceptions\ComunExceptions\" />
     <Folder Include="CustomExceptions\UrgenteExceptions\" />
-    <Folder Include="CustomExceptions\SeguimientoExceptions\" />
   </ItemGroup>
 
 </Project>
