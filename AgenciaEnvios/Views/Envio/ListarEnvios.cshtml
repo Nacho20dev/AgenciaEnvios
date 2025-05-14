@@ -21,10 +21,19 @@
     </div>
 }
 
+
+
 @if (ViewBag.mensaje != null)
 {
     <div class="alert alert-success">
         @ViewBag.mensaje
+    </div>
+}
+
+@if (TempData["AgregadoCorrectamente"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["AgregadoCorrectamente"]
     </div>
 }
 

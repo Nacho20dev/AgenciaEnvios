@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace AgenciaEnvios.DTOs.DTOs.DTOSeguimiento
 {
-    internal class DtoSeguimiento
+    public class DTOSeguimiento
     {
+        public int? IdEnvio { get; set; }
+
+        public string? comentario { get; set; }
+
+        public int? IdLogueado { get; set; }
+
+        public DateTime? Fecha { get; set; }
+
     }
 }

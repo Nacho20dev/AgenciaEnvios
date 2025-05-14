@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgenciaEnvios.LogicaNegocio.CustomExceptions.EnvioExceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,19 +13,33 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
         public string Comentario { get; set; }
         public Usuario Usuario { get; set; }
         public DateTime Fecha { get; set; }
+
+        public int? EnvioId { get; set; }
+
+        
     
 
     public Seguimiento()
         {
-
+            Fecha = DateTime.Now;
         }
 
-        public Seguimiento(int? id, string comentario, Usuario usuario, DateTime fecha)
+        public Seguimiento(string comentario, Usuario usuario)
         {
-            Id = id;
+            
             Comentario = comentario;
             Usuario = usuario;
-            Fecha = fecha;
+            Fecha = DateTime.Now;
         }
+
+        public void ComentarioVacio(String comentario)
+        {
+            if (string.IsNullOrEmpty(comentario))
+            {
+                throw new EnvioNoEncontradoEx("Debe ingresar un comentario.");
+            }
+
+        }
+
     }
 }
