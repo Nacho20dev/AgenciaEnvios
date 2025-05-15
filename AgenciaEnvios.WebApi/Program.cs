@@ -1,30 +1,23 @@
-using AgenciaEnvios.LogicaAplicacion;
+using AgenciaEnvios.LogicaAccesoDatos;
 using AgenciaEnvios.LogicaAccesoDatos.Repositorios;
+using AgenciaEnvios.LogicaAplicacion.CasosUso.CUAgencia;
+using AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio;
 using AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario;
+using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUAgencia;
+using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUEnvio;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUUsuario;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio;
-using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUEnvio;
-using AgenciaEnvios.LogicaAplicacion.CasosUso.CUAgencia;
-using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUAgencia;
-using AgenciaEnvios.LogicaAccesoDatos;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
-
 var connectionString = builder.Configuration.GetConnectionString("AgenciaEnvios");//DefaultConnection debe coincidir con el nombre designado en el JSON.
 
 builder.Services.AddDbContext<ApplicationDBContext>(
     options => options.UseSqlServer(connectionString)
 );
-
-
-
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllers();
 
 //DI - REPOS
 
@@ -53,38 +46,25 @@ builder.Services.AddScoped<ICUObtenerAgencia, CUObtenerAgencia>();
 builder.Services.AddScoped<ICUObtenerObjetoEnvio, CUObtenerObjetoEnvio>();
 builder.Services.AddScoped<ICUFinalizarEnvio, CUFinalizarEnvio>();
 builder.Services.AddScoped<ICUAgregarSeguimiento, CUAgregarSeguimiento>();
+builder.Services.AddScoped<ICUObtenerEnvioPorTracking, CUObtenerEnvioPorTracking>();
 
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-
-
-
-
-
-
-builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-
-app.UseSession();
-
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Usuario}/{action=Login}/{id?}");
+app.MapControllers();
 
 app.Run();
