@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CustomExceptions\ComunExceptions\" />
-    <Folder Include="CustomExceptions\UrgenteExceptions\" />
+    <Compile Remove="CustomExceptions\ComunExceptions\**" />
+    <Compile Remove="CustomExceptions\UrgenteExceptions\**" />
+    <EmbeddedResource Remove="CustomExceptions\ComunExceptions\**" />
+    <EmbeddedResource Remove="CustomExceptions\UrgenteExceptions\**" />
+    <None Remove="CustomExceptions\ComunExceptions\**" />
+    <None Remove="CustomExceptions\UrgenteExceptions\**" />
   </ItemGroup>
 
 </Project>

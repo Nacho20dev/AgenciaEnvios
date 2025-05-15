@@ -92,9 +92,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.First().Departamento)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Eficiente)
-            </th>
+           
             <th>Acciones</th>
             <th></th>
         </tr>
@@ -156,9 +154,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Departamento)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Eficiente)
-                    </td>
+                   
                     <td>
                         @Html.ActionLink("Agregar Seguimiento", "CreateSeguimiento", new { id = item.Id }) |
                     </td>

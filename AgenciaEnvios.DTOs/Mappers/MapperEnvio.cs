@@ -110,10 +110,7 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
                 dto.Departamento = urgente.DireccionPostal.Departamento;
             }
             dto.EnProceso=envio.Estado.ToString();
-            //if (envio.Estado == EstadoEnvios.En_Proceso)
-            //{
-            //    dto.EnProceso = "En Proceso";
-            //}
+            
 
             return dto;
         }

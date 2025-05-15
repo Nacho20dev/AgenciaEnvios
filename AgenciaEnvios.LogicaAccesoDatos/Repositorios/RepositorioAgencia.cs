@@ -1,5 +1,4 @@
-﻿using AgenciaEnvios.LogicaAccesoDatos.Migrations;
-using AgenciaEnvios.LogicaNegocio.Entidades;
+﻿using AgenciaEnvios.LogicaNegocio.Entidades;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;

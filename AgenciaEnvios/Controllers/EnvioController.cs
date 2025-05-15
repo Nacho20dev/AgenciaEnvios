@@ -6,7 +6,6 @@ using AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUAgencia;
 using AgenciaEnvios.LogicaAplicacion.ICasosUso.ICUEnvio;
 using AgenciaEnvios.LogicaNegocio.CustomExceptions.EnvioExceptions;
-using AgenciaEnvios.LogicaNegocio.CustomExceptions.SeguimientoExceptions;
 using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using AgenciaEnvios.LogicaNegocio.Entidades;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;

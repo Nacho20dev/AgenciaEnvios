@@ -1,5 +1,4 @@
-﻿using AgenciaEnvios.LogicaAccesoDatos.Migrations;
-using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
+﻿using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using AgenciaEnvios.LogicaNegocio.Entidades;
 using AgenciaEnvios.LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
@@ -56,9 +55,24 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
 
 
 
-        public Envio FindByNroTracking(string nroTracking)
+        public Envio FindByNroTracking(string NroTracking)
         {
-            return _context.Envios.FirstOrDefault(e => e.NroTracking == nroTracking);
+            var urgente = _context.Urgentes
+               .Include(e => e.AgenciaOrigen)
+               .Include(e => e.DireccionPostal)
+               .Include(e => e.Seguimientos)
+               .FirstOrDefault(e => e.NroTracking == NroTracking);
+
+            if (urgente != null)
+                return urgente;
+
+            var comun = _context.Comunes
+                .Include(e => e.AgenciaOrigen)
+                .Include(e => e.AgenciaDestino)
+                .Include(e => e.Seguimientos)
+                .FirstOrDefault(e => e.NroTracking == NroTracking);
+
+            return comun;
         }
 
         public int Remove(int id)

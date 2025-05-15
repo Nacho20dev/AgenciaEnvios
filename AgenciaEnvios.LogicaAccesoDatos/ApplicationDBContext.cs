@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgenciaEnvios.LogicaAccesoDatos.Migrations
+namespace AgenciaEnvios.LogicaAccesoDatos
 {
     public class ApplicationDBContext : DbContext
     {

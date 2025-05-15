@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AgenciaEnvios.LogicaNegocio.Entidades
@@ -59,6 +60,33 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
             }
 
         }
+
+        public void NroTrackingVacioEx(string NroTracking)
+        {
+            if (String.IsNullOrEmpty(NroTracking))
+            {
+                throw new NroTrackingVacioEx("El número de tracking no puede estar vacío.");
+            }
+        }
+
+        public static bool EsGuidValido(string NroTracking)
+        {
+          
+
+            // Patrón exacto para validar el formato de un GUID
+            string patron = @"^[a-fA-F0-9]{8}-" +
+                            @"[a-fA-F0-9]{4}-" +
+                            @"[a-fA-F0-9]{4}-" +
+                            @"[a-fA-F0-9]{4}-" +
+                            @"[a-fA-F0-9]{12}$";
+
+            return Regex.IsMatch(NroTracking, patron);
+
+           
+
+        }
+
+
 
         public void PesoInvalidoEx(double peso)
         {

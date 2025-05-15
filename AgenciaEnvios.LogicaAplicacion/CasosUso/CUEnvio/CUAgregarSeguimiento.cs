@@ -12,11 +12,11 @@ using AgenciaEnvios.DTOs.Mappers;
 using AgenciaEnvios.LogicaNegocio.CustomExceptions.UsuarioExceptions;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
-using AgenciaEnvios.LogicaNegocio.CustomExceptions.SeguimientoExceptions;
+using AgenciaEnvios.LogicaNegocio.CustomExceptions.EnvioExceptions;
 
 namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
 {
-   public class CUAgregarSeguimiento: ICUAgregarSeguimiento
+    public class CUAgregarSeguimiento: ICUAgregarSeguimiento
     {
         private IRepositorioEnvio _repositorioEnvio;
         private IRepositorioAuditoria _repoAuditoria;

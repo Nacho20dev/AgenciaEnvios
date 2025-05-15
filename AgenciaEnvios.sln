@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades", "Utilidades\Ut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasehear", "Hasehear\Hasehear.csproj", "{F317ACCC-A000-43C0-A78B-C286A736FF55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenciaEnvios.WebApi", "AgenciaEnvios.WebApi\AgenciaEnvios.WebApi.csproj", "{0839AEA8-BD98-4A90-8B7A-8B3646749BC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F317ACCC-A000-43C0-A78B-C286A736FF55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F317ACCC-A000-43C0-A78B-C286A736FF55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F317ACCC-A000-43C0-A78B-C286A736FF55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0839AEA8-BD98-4A90-8B7A-8B3646749BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0839AEA8-BD98-4A90-8B7A-8B3646749BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0839AEA8-BD98-4A90-8B7A-8B3646749BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0839AEA8-BD98-4A90-8B7A-8B3646749BC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
