@@ -1,6 +1,6 @@
 ﻿namespace AgenciaEnvios.LogicaNegocio.CustomExceptions.EnvioExceptions
 {
-   
+
     public class EnvioNoEncontradoEx : Exception
     {
         public EnvioNoEncontradoEx()

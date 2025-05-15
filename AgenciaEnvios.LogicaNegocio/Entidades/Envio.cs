@@ -61,13 +61,6 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 
         }
 
-        public void NroTrackingVacioEx(string NroTracking)
-        {
-            if (String.IsNullOrEmpty(NroTracking))
-            {
-                throw new NroTrackingVacioEx("El número de tracking no puede estar vacío.");
-            }
-        }
 
         public static bool EsGuidValido(string NroTracking)
         {

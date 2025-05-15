@@ -21,48 +21,29 @@ namespace AgenciaEnvios.WebApi.Controllers
 
 
         [HttpGet("{NroTracking}")]
-
         public ActionResult GetByNroTracking(string NroTracking)
         {
             try
             {
-
-                DTOAltaEnvio dto = _CuObtenerEnvioPorTracking.FindByNroTracking(NroTracking);
-                if (dto != null)
-                {
-
-                    return Ok(dto);
-                }
-
-                else
-                {
-                    return NotFound();
-                }
+                var dto = _CuObtenerEnvioPorTracking.FindByNroTracking(NroTracking);
+                return Ok(dto);
             }
-
-            catch (EnvioNoEncontradoEx)
-            {
-                return NotFound();
-            }
-
+          
             catch (GuidNoValidoEx)
             {
-                return NotFound();
+                return BadRequest("Formato inválido para número de tracking.");
             }
-
-            catch (NroTrackingVacioEx)
+            catch (EnvioNoEncontradoEx)
             {
-                return BadRequest();
+                return NotFound("No se encontró ningún envío con ese número de tracking.");
             }
-
-
-
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(500, "Error inesperado.");
             }
-
         }
+
+
 
 
 

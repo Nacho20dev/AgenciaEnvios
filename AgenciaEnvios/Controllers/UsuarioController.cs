@@ -227,6 +227,14 @@ namespace AgenciaEnvios.WebApp.Controllers
                 ViewBag.msj = e.Message;
                 return View();
             }
+
+
+            catch (ContraseniaVaciaEx e)
+            {
+                ViewBag.msj = e.Message;
+                return View();
+            }
+
             catch (Exception ex)
             {
                 ViewBag.msj = ex.Message;

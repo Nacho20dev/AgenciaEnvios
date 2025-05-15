@@ -26,9 +26,15 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
         {
             try
             {
+
+                if (string.IsNullOrWhiteSpace(dto.Contrasenia))
+                {
+                    throw new ContraseniaVaciaEx("La contraseña no puede estar vacía.");
+                }
+
                 Usuario u = _repoUsuario.FindByEmail(dto.Email);
 
-                // **VERIFICA SI EL USUARIO ES NULL AQUÍ**
+    
                 if (u == null)
                 {
                     throw new EmailNoRegistradoEx("El email ingresado no se encuentra registrado.");
@@ -53,9 +59,15 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             {
                 throw e;
             }
+
+            catch(ContraseniaVaciaEx e) 
+            {
+                throw e;
+            }
+
             catch (Exception e)
             {
-                throw e; // Considera loggear otros errores aquí
+                throw e; 
             }
         }
     }

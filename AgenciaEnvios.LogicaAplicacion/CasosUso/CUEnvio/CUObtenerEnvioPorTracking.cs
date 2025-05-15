@@ -15,50 +15,25 @@ public class CUObtenerEnvioPorTracking : ICUObtenerEnvioPorTracking
         _repositorioEnvio = repositorioEnvio;
     }
 
-    public DTOAltaEnvio FindByNroTracking(string NroTracking)
+   
+
+        public DTOAltaEnvio FindByNroTracking(string nroTracking)
     {
-        DTOAltaEnvio dto = new DTOAltaEnvio();
-        try
-        {
-            
+        
 
-            if (!string.IsNullOrEmpty(NroTracking))
-            {
-                if (Envio.EsGuidValido(NroTracking))
-                {
-                    Envio envio = _repositorioEnvio.FindByNroTracking(NroTracking);
-                    if (envio != null)
-                    {
-                        dto = MapperEnvio.EnvioToDTOEnvio(envio);
+        if (!Envio.EsGuidValido(nroTracking))
+            throw new GuidNoValidoEx("El número de tracking no tiene un formato válido.");
 
-                     
-                    }
+        var envio = _repositorioEnvio.FindByNroTracking(nroTracking);
 
-                    else
-                    {
-                        throw new EnvioNoEncontradoEx();
-                    }
-                }
-                else
-                {
-                    throw new GuidNoValidoEx("No cumple formato");
+        if (envio == null)
+            throw new EnvioNoEncontradoEx();
 
-                }
-                
-            }
-             else
-                {
-                throw new NroTrackingVacioEx();
-                }
-
-           
-        }
-
-
-        catch (Exception ex)
-        {
-
-        }
-        return dto;
+        return MapperEnvio.EnvioToDTOEnvio(envio);
     }
+
+
+
+
+
 }
