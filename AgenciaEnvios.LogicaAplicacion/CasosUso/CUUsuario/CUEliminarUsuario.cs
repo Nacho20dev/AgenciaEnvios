@@ -23,6 +23,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             _repoAuditoria = repoAuditoria;
         }
 
+        //Chequea que el usuario logueado sea admin, trae de la base el usuario a partir del id que recibe por
+        //parametro, y luego de chequear que exista procede a eliminarlo. Audita el caso de exito así como las
+        //diversas posibles excepciones.  
         public void EliminarUsuario(int id, int logueado)
         {
             try
@@ -62,10 +65,10 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
 
   
 
-        public void EliminarUsuario(int id)
-        {
-            _repoUsuario.Remove(id);
-        }
+        //public void EliminarUsuario(int id)
+        //{
+        //    _repoUsuario.Remove(id);
+        //}
 
     }
 }

@@ -27,6 +27,13 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             _repoAuditoria = repoAuditoria;
         }
 
+
+        //Recibe un dtoAltaUsuario por parametro. Chequea que el mail ingresado no esté ya en la base,
+        //chequea que el rol sea admin, mapea el DTO, chequea que la contraseña cumpla con el formato,
+        //para luego agregarlo y auditarlo. En caso de error llama a los catch y audita el errro
+        // +
+
+
         public void AltaUsuario(DTOAltaUsuario dto)
         {
             try

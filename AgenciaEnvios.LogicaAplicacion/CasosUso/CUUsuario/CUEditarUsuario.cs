@@ -26,13 +26,19 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             _repoAuditoria = repoAuditoria;
         }
 
+
+        // recibe un dtoUsuario por parametros. Chequea que el LogueadoID
+        // que trae (correspondiente al que está cargado en la variable de sesión)
+        // sea admin. Mapea para poder tener un usuario al momento de actualizar,
+        // aunque previamente lo valida. Audita el caso de exito. En caso que entre en los catch
+        // o en el else también audita y lanza las excepciones correspodnientes.
         public void EditarUsuario(DTOUsuario dto)
         {
             try
             {
                 if (_repoUsuario.EsAdmin(dto.LogueadoId)  == true) 
                 { 
-                LogicaNegocio.Entidades.Usuario u = MapperUsuario.DTOToUsuario(dto);
+                Usuario u = MapperUsuario.DTOToUsuario(dto);
                
                 u.Validar();
                 int idEntidad = _repoUsuario.Update(u);

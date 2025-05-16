@@ -20,6 +20,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
         {
             _repositorioEnvio = repositorioEnvio;
         }
+
+
+        //recibe un id para buscar en la base el objeto y luego lo mapea para poder devolver un DTO. 
         public DTOAltaEnvio ObtenerEnvio(int id)
         {
             Envio e = _repositorioEnvio.FindById(id);

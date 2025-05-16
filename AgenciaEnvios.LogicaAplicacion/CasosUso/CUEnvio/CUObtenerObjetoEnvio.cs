@@ -18,6 +18,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
         {
             _repositorioEnvio = repositorioEnvio;
         }
+
+        //Recibe un id por parametros que es el que usara para pasarle al método del repo de envío "FindById",
+        // el cual traera el objeto de la base para poder retornarlo.
         public Envio ObtenerObjetoEnvio(int id)
         {
             return _repositorioEnvio.FindById(id);

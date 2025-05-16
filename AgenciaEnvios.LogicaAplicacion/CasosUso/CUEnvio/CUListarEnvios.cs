@@ -33,7 +33,8 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
         }
 
 
-        
+        //trae de la base una lista con todos los envios, los mapea para poder devolverlos como DTO y asi
+        //poder mostrarlos.
         public List<DTOAltaEnvio> ListarEnvios()
         {
             try

@@ -24,6 +24,10 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             _repoAuditoria = repoAuditoria;
         }
 
+
+        //recibe el id de loguado ppara corroborar que es admin y en caso de que no lo sea lo audita y lanza la
+        //excepción. En caso que sea admin, trae de la base la lista de usuarios. Audita que existan usuarios y en 
+        //caso que si, mapea la lista para poder devolver la lista de dtos y audita el caso de exito.
         public List<DTOUsuario> ListarUsuarios(int logueadoId)
         {
             try

@@ -38,7 +38,10 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
             }
 
 
-
+        //Metodo de alta que trae un DTO del controler, hace las validadiones correspondientes,
+        //se trae del repo los objetos que necesita, mapea el DTO y llama a 
+        //metodo asignarPropiedadesComunes que carga en el envio los objetos previamente cargados.
+        //Luego agrega a la base ese envio creado
         public void AltaEnvio(DTOAltaEnvio dto)
         {
             try
@@ -94,6 +97,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
             catch (Exception e) { AuditarError(dto.IdLogueado, "ALTA_ENVIO", "ERROR inesperado: " + e.Message); throw; }
         }
 
+
+        // Carga en el envio pasado por parametro el usuario, la agencia origen y su id, a partir de lo que también
+        // recibe por parametro.
         private void AsignarPropiedadesComunes(Envio envio, Usuario usuario, Agencia agenciaOrigen)
         {
             envio.Usuario = usuario;

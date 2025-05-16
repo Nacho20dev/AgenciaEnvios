@@ -30,16 +30,29 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
             _repoUsuario = repoUsuario;
         }
 
+
+        // Método principal del caso de uso. agregar seguimiento a un envío.
+        // Recibe el DTO de seguimiento y el idlogueado desde el controler
+        // Crea un seguimiento de forma local y se lo agrega al envio que traemos del repo
+        // para luego actualizar la base
         public void AgregarSeguimiento(DTOSeguimiento s,  int? idLogueado)
         {
             try
             {
+                
                 Envio env = _repositorioEnvio.FindById(s.IdEnvio);
 
-                Seguimiento seg= new Seguimiento();
+                
+                Seguimiento seg = new Seguimiento();
                 seg.Comentario = s.comentario;
+
+                
                 seg.Usuario = _repoUsuario.FindById(idLogueado);
+
+
                 env.Seguimientos.Add(seg);
+
+
                 _repositorioEnvio.Update(env);
                 AuditarExito((int)idLogueado, (int)seg.Id, seg);
 

@@ -50,9 +50,12 @@ namespace AgenciaEnvios.WebApp.Controllers
         }
 
 
+
+        //Llama al filtro LoguadoAuthorize que chequea que esté logueado para poder acceder al controler.
+        //Crea un viemodel para cargar las agencias en la vista. las trae  con el metodo del cu
+        //obtenerAgencias. va cargando para cada una el nombre y el id en un SelectListItem el cual cargará en agenciaOrigen
+        //del viewModel. hace lo mismo para agenciaDestino. Luego retorna el viewmodel con ambos SelectListItems cargados.
         [LogueadoAuthorize]
-        //[AdministradorAuthorize]
-        //[FuncionarioAuthorize]
         public IActionResult Create()
         {
             ViewData["Mensaje"] = HttpContext.Session.GetInt32("LogueadoId");
@@ -79,7 +82,10 @@ namespace AgenciaEnvios.WebApp.Controllers
             return View(vm);
         }
 
-
+        //Recibe el viewmodel cargado con los datos de alta generados en el formulario. carga la variable de sesion
+        //con el usuario logueado para la auditoría. LLama al metodo AltaEnvio del caso de uso y le pasa el DTO que
+        //está dentro del viewmodel que es quien tiene el dto con los datos para el alta. Manda el mensaje "Alta Correcta"
+        //en el caso de exito y redirige a la lista actualizada de envios.
         [HttpPost]
         public IActionResult Create(AltaEnvioViewModel vm)
         {
@@ -131,17 +137,19 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
 
-
-
+        //Llama al filtro LoguadoAuthorize que chequea que esté logueado para poder acceder al controler.
+        //Recibe un id que trajo del la vista anterior con el id del envio que quiere editar. Carga los
+        //datos del envío en pantalla de un DTOAltaEnvio, a partir de llamar al método del caso de uso. Retorna 
+        //la misma vista con estos datos que mostrará
         [LogueadoAuthorize]
          public IActionResult Edit(int id)
         {
             try
             {
-                // Obtener el envío a través del caso de uso
+               
                 DTOAltaEnvio model = _cuObtenerEnvio.ObtenerEnvio(id);
 
-                // Devolvemos el modelo al View para editar
+                
                 return View(model);
             }
             catch (EnvioNoEncontradoEx e)
@@ -158,6 +166,9 @@ namespace AgenciaEnvios.WebApp.Controllers
         }
 
 
+        //Llama al filtro LoguadoAuthorize que chequea que esté logueado para poder acceder al controler.
+        //carga en una lista de DTOAltaEnvio el DTO que recibe a través del metodo del cu ListarEnvios y
+        //lo retorna a la misma vista.
         [LogueadoAuthorize]
         public IActionResult ListarEnvios()
         {
@@ -190,7 +201,9 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
 
-
+        //recibe de la vista el id del envio a finalizar. trae del repo el usuario a partir de la
+        //variable de sesión logueadoIDy le pasa al metodo del caso de uso FinalizarEnvio el id y el usuario.
+        //Retorna a la misma vista con mensaje de exito. 
         public IActionResult Finalizar(int id)
         {
 
@@ -202,7 +215,10 @@ namespace AgenciaEnvios.WebApp.Controllers
         }
 
 
-
+        //recibe de la vista un id. Crea un vm que tendrá dentro el DTO de Envio
+        //y el de seguimiento para poder dar alta a seguimineto dentro del envio.
+        //carga dentro del DTOALtaEnvio el envio en el que se creará el nuevo seguimiento, }
+        //no sin antes haberlo ido a buscar a la base. retorna la vista con el vm.
         [LogueadoAuthorize]
         public IActionResult CreateSeguimiento(int id)
         {
@@ -215,7 +231,10 @@ namespace AgenciaEnvios.WebApp.Controllers
 
         }
 
-
+        // Recibe los datos de un nuevo seguimiento y el ID del envío.
+        // Verifica si hay un usuario logueado en sesión y, si es así, agrega el seguimiento.
+        // Redirige al listado de envíos si tiene éxito, o al login si no hay usuario.
+        // Si ocurre un error (como comentario vacío u otro), vuelve a mostrar la vista.
         [HttpPost]
         public IActionResult CreateSeguimiento(AltaSeguimientoViewModel vm, int id)
         {

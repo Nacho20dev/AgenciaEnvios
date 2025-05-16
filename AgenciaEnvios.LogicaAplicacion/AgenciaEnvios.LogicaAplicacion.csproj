@@ -7,17 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CasosUso\CUComun\**" />
     <Compile Remove="CasosUso\CUSeguimiento\**" />
+    <Compile Remove="CasosUso\CUUrgente\**" />
     <Compile Remove="ICasosUso\ICUSeguimiento\**" />
+    <EmbeddedResource Remove="CasosUso\CUComun\**" />
     <EmbeddedResource Remove="CasosUso\CUSeguimiento\**" />
+    <EmbeddedResource Remove="CasosUso\CUUrgente\**" />
     <EmbeddedResource Remove="ICasosUso\ICUSeguimiento\**" />
+    <None Remove="CasosUso\CUComun\**" />
     <None Remove="CasosUso\CUSeguimiento\**" />
+    <None Remove="CasosUso\CUUrgente\**" />
     <None Remove="ICasosUso\ICUSeguimiento\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CasosUso\CUComun\" />
-    <Folder Include="CasosUso\CUUrgente\" />
     <Folder Include="ICasosUso\ICUComun\" />
     <Folder Include="ICasosUso\ICUUrgente\" />
   </ItemGroup>

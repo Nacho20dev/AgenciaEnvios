@@ -22,6 +22,10 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
             AgenciaDestino = agenciaDestino;
         }
 
+        //Metodo que sobrescribe el metodo de la clase padre (envio) para finalizar envio según cada caso.
+        //En esta caso, para el envío comun, carga la fecha actual para poder registrarla en el seguimento
+        //y cambia el estado del envio a finalizado. Luego genera un seguimiento en el que cargará por defecto
+        //el comentario, cargará el usuario que recibió por parametro y cargará la fecha anteriormente obtenida. 
         public override void FinalizarEnvio(Usuario usuario)
         {
             FechaFin = DateTime.Now;

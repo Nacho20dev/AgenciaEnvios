@@ -21,6 +21,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
         {
             _repoUsuario = repoUsuario;
         }
+
+        //Llama al metodo findbyid del repo para traer el usario a partir de el id que recibió por parámetro.
+        //Luego lo mapea para poder devolver un DTO.
         public DTOUsuario ObtenerUsuario(int id)
         {
             Usuario b = _repoUsuario.FindById(id);

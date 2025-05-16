@@ -17,6 +17,10 @@ public class CUObtenerEnvioPorTracking : ICUObtenerEnvioPorTracking
 
    
 
+
+    //Recibe un nro de trackin (string), llama al metodo EsGuidValido de la clase para chequear
+    //que el formato es valido luego llama al metodo del repo findbyNroTracking que en caso de encontrarlo
+    //mapea para devolverlo como un DTOAltaEnvio.
         public DTOAltaEnvio FindByNroTracking(string nroTracking)
     {
         

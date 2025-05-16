@@ -65,6 +65,11 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 
 
         }
+
+        //Recibe por parametro la contraseña a validar. Valida que no está vacia, que tenga una longitud de más
+        //de 8 caracteres y llama a la función cumpleCaracteres en la cual se chequea que tenga mayuscula, minuscula,
+        //numero y simbolo. Si no lanza ninguna de las excepciones no hace nada, simplemente permite que siga adelante.
+        //
         public  void ValidarContrasenia(string contrasenia)
         {
             if (string.IsNullOrEmpty(contrasenia))
@@ -75,33 +80,38 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
             {
                 throw new ContraseniaCortaEx("La contraseña debe tener 8 caracteres como mínimo");
             }
-
-            bool CumpleCaracteres(string input)
-            {
-                bool tieneMayuscula = false;
-                bool tieneMinuscula = false;
-                bool tieneNumero = false;
-                bool tieneEspecial = false;
-
-                foreach (char c in input)
-                {
-                    if (char.IsUpper(c))
-                        tieneMayuscula = true;
-                    else if (char.IsLower(c))
-                        tieneMinuscula = true;
-                    else if (char.IsDigit(c))
-                        tieneNumero = true;
-                    else
-                        tieneEspecial = true;
-                }
-
-                return tieneMayuscula && tieneMinuscula && tieneNumero && tieneEspecial;
-            }
-
+         
             if (!CumpleCaracteres(contrasenia))
             {
                 throw new NoCumpleCaracteresEx("La contraseña debe contener al menos una minúscula, una mayúscula,un número y un simbolo");
             }
+        }
+
+
+            //recibe la contraseña para chequear que tenga mayuscula, minusculas, numero y caracter especial.
+            //Incializa un bool para cada cosa a chequear en false y a medida que va recorriendo la contraseña
+            //y que va cumpliendo con alguno de las cosas a chequear pasa a true el bool correspondiente.
+            //Al final devolverá true si todos los bool estaban en true, o false si alguno estaba en false
+            public bool CumpleCaracteres(string input)
+        {
+            bool tieneMayuscula = false;
+            bool tieneMinuscula = false;
+            bool tieneNumero = false;
+            bool tieneEspecial = false;
+
+            foreach (char c in input)
+            {
+                if (char.IsUpper(c))
+                    tieneMayuscula = true;
+                else if (char.IsLower(c))
+                    tieneMinuscula = true;
+                else if (char.IsDigit(c))
+                    tieneNumero = true;
+                else
+                    tieneEspecial = true;
+            }
+
+            return tieneMayuscula && tieneMinuscula && tieneNumero && tieneEspecial;
         }
 
     }

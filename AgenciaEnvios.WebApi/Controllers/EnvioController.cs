@@ -20,6 +20,10 @@ namespace AgenciaEnvios.WebApi.Controllers
         }
 
 
+
+        //controler que recibe nro de tracking y carga un dto a partir de llamar al metodo del caso de uso. En caso 
+        //de exito retorna un Ok con el dto a la Api. En caso contrario lanza la excepción correspodiente y retorna
+        //el correspondiente codigo de error.
         [HttpGet("{NroTracking}")]
         public ActionResult GetByNroTracking(string NroTracking)
         {

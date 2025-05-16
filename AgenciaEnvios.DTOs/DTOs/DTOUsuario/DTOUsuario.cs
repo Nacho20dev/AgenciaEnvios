@@ -11,7 +11,7 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
 
     public class DTOUsuario
     {
-
+        //Este DTO a diferencia del de Alta recibe un id
         public int Id {  get; set; }
 
 

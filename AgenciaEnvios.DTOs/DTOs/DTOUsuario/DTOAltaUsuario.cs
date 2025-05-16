@@ -11,7 +11,7 @@ namespace AgenciaEnvios.DTOs.DTOs.DTOUsuario
 
     public class DTOAltaUsuario
     {
-        
+        //El DTO de Alta tiene la particularidad de no recibir un id porque lo va a asignar recién en la base
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre no puede superar los 50 caracteres.")]

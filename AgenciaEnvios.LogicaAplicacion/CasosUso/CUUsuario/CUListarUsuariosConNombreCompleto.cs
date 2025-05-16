@@ -21,7 +21,9 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
         private IRepositorioEnvio _repoEnvio;
 
 
-
+        // recibe un id de logueado para chequear que es admin y a la vez para devolver en un dto nombre 
+        //completo de dicho usuario a efectos de usarlo al auditar.
+        //
         public DTOUsuario FindUsuarioNombreCompleto(int logueadoId)
         {
             try

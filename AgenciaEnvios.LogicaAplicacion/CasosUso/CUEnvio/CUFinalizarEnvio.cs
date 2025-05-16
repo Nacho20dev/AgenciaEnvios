@@ -21,6 +21,10 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUEnvio
             _repositorioEnvio = repositorioEnvio;
         }
 
+        //Recibe del controler el id del envio y el usuario. Recupera del repo el envio a partir del id del 
+        //recibido y llama al metodo de la clase FinalizarEnvio que recibe por parametro un usuario para
+        //poder registrarlo en el seguimiento que se genera al finalizar el envio. Luego realiza el update para que
+        //quede actualizado en la base. 
         public void FinalizarEnvio(int envioId, Usuario usuario)
         {
             int? eID = (int?)envioId;

@@ -25,7 +25,7 @@ builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioAuditoria, RepositorioAuditoria>();
 builder.Services.AddScoped<IRepositorioEnvio, RepositorioEnvio>();
 builder.Services.AddScoped<IRepositorioAgencia, RepositorioAgencia>();
-builder.Services.AddScoped<IRepositorioSeguimiento, RepositorioSeguimiento>();
+
 
 
 

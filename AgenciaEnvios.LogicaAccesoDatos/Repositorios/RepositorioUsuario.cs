@@ -32,9 +32,7 @@ namespace AgenciaEnvios.LogicaAccesoDatos.Repositorios
     }
 
 
-        //    //Recibe un usuario previamente mapeado. Lo busca por mail,
-        //    //verifica que no deje ningún dato de los editables vacio
-        //    //y lo agrega al context. 
+
         public Usuario FindByEmail(string email)
     {
         if (email == null) throw new ArgumentException("Datos incorrectos");

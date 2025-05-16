@@ -31,16 +31,11 @@ namespace AgenciaEnvios.WebApp.Controllers
             _cuEditarUsuario = cuEditarUsuario;
         }
 
-        //[LogueadoAuthorize]
-        ////[FuncionarioAuthorize]
-        ////[AdministradorAuthorize]
-        ///Deberíamos cambiar el index para que sea accesible a 
-        ///todos los usuarios logueados y que sea una vista general y el 
-        /// que lo programado aqui sea un listar usuario del administrador
 
 
     
-
+        //Carga un index donde se toma de la variable de sesion el nombre de usuario, se chequea que no sea vacio
+        //y se le envia a la vista que mostrará un mensaje de bienvenida. 
         [LogueadoAuthorize]
         public IActionResult Index()
         {
@@ -59,7 +54,10 @@ namespace AgenciaEnvios.WebApp.Controllers
 
 
 
-
+        //Se filtra por usuario logueado y que sea admin.
+        //Se carga una lista de DTOUsuario a partur del metodo del caso de uso ListarUsuarios.
+        //Se retorna la misma vista con este listado obtenido. Tira las excepciones correspondientes
+        //en caso de no poder mostrar la lista 
         [LogueadoAuthorize]
         [AdministradorAuthorize]    
         public IActionResult ListarUsuarios()
@@ -91,7 +89,8 @@ namespace AgenciaEnvios.WebApp.Controllers
         
 
 
-
+        //valida que haya un usuario logueado y que sea admin.
+        //retorna la misma vista con un nuevo DTOAltaUsuario que va permitir que se cree el formulario
         [LogueadoAuthorize]
         [AdministradorAuthorize]
         public IActionResult Create()
@@ -99,18 +98,24 @@ namespace AgenciaEnvios.WebApp.Controllers
             return View(new DTOAltaUsuario());
         }
 
+
+
+        //toma el id de logueado de la variable de sesion para cargarlo al dto.
+        //valida si tiene algún valor ese loguadoid, en caso contrario lanza excepción.
+        //En caso de tener vallor lo asigna y llama al metodo AltaUsuario del caso de uso.
+        //MAnda un mensaje de exito y redirige al listado de usuario actualizado.
         [HttpPost]
         public IActionResult Create(DTOAltaUsuario dto)
         {
             try
             {
-                // Recupera el ID del administrador logueado de la sesión
+
                 int? logueadoId = HttpContext.Session.GetInt32("LogueadoId");
 
-                // Verifica si el ID del administrador se encontró en la sesión
+
                 if (logueadoId.HasValue)
                 {
-                    // Asigna el ID del administrador al DTO
+
                     dto.LogueadoId = logueadoId.Value;
 
                     _cuAltaUsuario.AltaUsuario(dto);
@@ -119,9 +124,9 @@ namespace AgenciaEnvios.WebApp.Controllers
                 }
                 else
                 {
-                    // Si no se encuentra el ID en la sesión, algo anda mal con la autenticación
+                 
                     ViewBag.mensaje = "Error: No se pudo obtener el ID del administrador logueado.";
-                    return View(); // O podrías redirigir a una página de error
+                    return View(); 
                 }
             }
             catch (NombreVacioEx e)
@@ -164,6 +169,7 @@ namespace AgenciaEnvios.WebApp.Controllers
             return View();
         }
 
+
         public IActionResult Login()
         {
 
@@ -172,6 +178,9 @@ namespace AgenciaEnvios.WebApp.Controllers
         }
 
 
+        //carga un dto con los datos que necesita al aprtir del dto que recibió por parametro que
+        //solo tenía mail y contraseña, a la vez que verifica que email existe y contraseña se
+        //corresponde con el. en caso de exito redirige a la vista del index. Sino lanza excepciones.
         [HttpPost]
         public IActionResult Login(DTOUsuario dto)
         {
@@ -243,13 +252,19 @@ namespace AgenciaEnvios.WebApp.Controllers
          
         }
 
+        //Hace un clear a las variables de sesión para limpiar el dato que vinculaba al
+        //usuario logueado y deririge al index.
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "Usuario");
         }
 
-
+        //carga una variable con el id del loguado y luego se chequea que no este vacio, osea que quien este intentando
+        //hacer el remove esté loguado. En caso de exito llama al metodo del cu EliminarUsuario al que le pasa el id del
+        //usuario que recibió por parametro(el que queria borrar).
+        //Luego redirige nuevamente al listado de usuario con mensaje de exito y lista actualizada.
+        //
         public IActionResult Remove(int id) 
         {
             
@@ -275,6 +290,9 @@ namespace AgenciaEnvios.WebApp.Controllers
             }
         }
 
+
+        //recibe el id del usuario a editar, llama al metodo del cu ObtenerUsuario y le pasa el id por parametro. Esto 
+        //es cargado en un dto para mostrar los datos del usuario y poder editarlos. 
         public IActionResult Edit(int id)
         {
 
@@ -284,6 +302,8 @@ namespace AgenciaEnvios.WebApp.Controllers
         }
 
 
+        //carga el id del logueado en el dto y luego llama al metodo del cu EditarUsuario pasando el dto por parametro.
+        //redirige al listado de usuario actualizado. En caso de no cumplir lanza las excepciones correspondientes. 
         [HttpPost]
         public IActionResult Edit(DTOUsuario dto)
         {

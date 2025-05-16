@@ -22,6 +22,10 @@ namespace AgenciaEnvios.LogicaAplicacion.CasosUso.CUUsuario
             _repoUsuario = repoUsuario;
         }
 
+
+        //Trae por parametros un DTOUsuario que viene con email y contraseña. Los valida y luego los busca en la base.
+        //En caso de encontrarlos y que la contraseña coincida (la hashea para comparar la de la base que está hasheada)
+        //carga en el DTO el id, el nombre y el rol para luego retornarlo.
         public DTOUsuario VerificarDatosParaLogin(DTOUsuario dto)
         {
             try

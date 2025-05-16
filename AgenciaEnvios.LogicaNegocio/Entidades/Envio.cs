@@ -19,7 +19,6 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
         public double Peso { get; set; }
         public EstadoEnvios Estado { get; set; }
         public List<Seguimiento> Seguimientos { get; set; }
-        
         public Agencia AgenciaOrigen { get; set; }
         public int AgenciaOrigenId { get; set; }
 
@@ -61,7 +60,9 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
 
         }
 
-
+        //Metodo en el que se recibe un nroTracking y se chequea que cumpla con el formato.
+        //El formato está establecido en el string patron que luego es utilizado cuando se llama al método
+        //IsMAtch de Regex. Este devolverá true si cumple con el formato o false en caso contrario. 
         public static bool EsGuidValido(string NroTracking)
         {
           
@@ -107,6 +108,7 @@ namespace AgenciaEnvios.LogicaNegocio.Entidades
             }
         }
 
+        //Metodo abstract que será sobreescrito en cada clase hija según sea el tipo de envio.
         public abstract void FinalizarEnvio(Usuario usuario);
         
     }
